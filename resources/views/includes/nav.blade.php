@@ -16,10 +16,10 @@
         <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="" class="nav-link">
-            <i class="nav-icon fas fa-shopping-bag"></i>
+          <a href="{{ route('entrants.index') }}" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-user"></i>
             <p>
-              Какой то пункт
+              Абитуриенты
             </p>
           </a>
         </li>
