@@ -12,9 +12,6 @@ class TeathersController extends Controller
     public function create(){
         return view('teathers.create');
     }
-    public function delete(){
-        return view('teathers.delete');
-    }
     public function show(){
         return view('teathers.show');
     }

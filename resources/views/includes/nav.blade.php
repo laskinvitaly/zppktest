@@ -38,7 +38,14 @@
               Абитуриенты
             </p>
           </a>
-        </li>        
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('lesson.index') }}" class="nav-link">
+            <i class="nav-icon fas fa-shopping-bag"></i>
+            <p>
+              Занятия
+            </p>
+          </a>        
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

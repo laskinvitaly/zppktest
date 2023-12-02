@@ -14,9 +14,6 @@ class EntrantsController extends Controller
         return view('entrants.create');
     }
 
-    public function delete() {
-        return view('entrants.delete');
-    }
 
     public function show() {
         return view('entrants.show');
