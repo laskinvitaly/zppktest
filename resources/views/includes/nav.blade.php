@@ -24,6 +24,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('teather.index') }}" class="nav-link">
+            <i class="nav-icon fas fa-shopping-bag"></i>
+            <p>
+              Преподаватели
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('entrant.index') }}" class="nav-link">
             <i class="nav-icon fas fa-solid fa-user"></i>
             <p>
