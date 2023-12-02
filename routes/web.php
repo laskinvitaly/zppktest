@@ -6,6 +6,7 @@ use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\EntrantsController;
 use App\Http\Controllers\TeathersController;
 use App\Http\Controllers\LessonsController;
+use App\Http\Controllers\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,4 +45,10 @@ Route::group(['prefix' => 'admin/lessons'], function(){
     route::get('/create', [LessonsController::class,'create'])->name('lesson.create');
     route::get('/{lesson}/edit', [LessonsController::class,'edit'])->name('lesson.edit');       
     route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show');    
+});
+Route::group(['prefix' => 'admin/categories'], function(){
+    Route::get('/', [CategoriesController::class, 'index'])->name('category.index');
+    Route::get('/create', [CategoriesController::class, 'create'])->name('category.create');
+    Route::get('/{category}', [CategoriesController::class, 'show'])->name('category.show');
+    Route::get('/{category}/edit', [CategoriesController::class, 'edit'])->name('category.edit');
 });
