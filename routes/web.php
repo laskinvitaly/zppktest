@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GroupsController;
-
-
-
+use App\Http\Controllers\EntrantsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,9 +25,11 @@ Route::get('/', function () {
         Route::get('/create', [GroupsController::class, 'create'])->name('group.create');
         Route::get('/{group}', [GroupsController::class, 'show'])->name('group.show');
         Route::get('/{group}/edit', [GroupsController::class, 'edit'])->name('group.edit');
- });
-    
-
-    
-    
-  
+ }); 
+ 
+Route::group(['prefix' => 'admin/entrants'], function(){
+    Route::get('/', [EntrantsController::class, 'index'])->name('entrant.index');
+    Route::get('/create', [EntrantsController::class, 'create'])->name('entrant.create');
+    Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrants.show');
+    Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
+});
