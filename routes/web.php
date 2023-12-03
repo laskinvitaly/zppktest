@@ -33,11 +33,11 @@ Route::group(['prefix' => 'admin'], function(){
     Route::group(['prefix' => 'entrants'], function(){
         Route::get('/', [EntrantsController::class, 'index'])->name('entrant.index');
         Route::get('/create', [EntrantsController::class, 'create'])->name('entrant.create');
-        route::post('/', [EntrantsController::class, 'store'])->name('entrant.store');
+        Route::post('/', [EntrantsController::class, 'store'])->name('entrant.store');
         Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrant.show');
-        route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
+        Route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
         Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
-        route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
+        Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
     }); 
     Route::group(['prefix' => 'teathers'], function(){
         Route::get('/', [TeathersController::class, 'index'])->name('teather.index');
