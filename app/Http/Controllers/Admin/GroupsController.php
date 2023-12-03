@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -11,7 +12,7 @@ class GroupsController extends Controller
      */
     public function index()
     {
-       return view('groups.index');
+       return view('admin.groups.index');
     }
 
     /**
@@ -20,7 +21,7 @@ class GroupsController extends Controller
     public function create()
     {
         //
-        return view('groups.create');
+        return view('admin.groups.create');
     }
 
     /**
@@ -36,7 +37,7 @@ class GroupsController extends Controller
      */
     public function show(string $id)
     {
-        return view('groups.show');
+        return view('admin.groups.show');
     }
 
     /**
@@ -44,7 +45,7 @@ class GroupsController extends Controller
      */
     public function edit(string $id)
     {
-        return view('groups.edit');
+        return view('admin.groups.edit');
     }
 
     /**
