@@ -43,7 +43,10 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/', [TeathersController::class, 'index'])->name('teather.index');
         Route::get('/create', [TeathersController::class, 'create'])->name('teather.create');
         Route::get('/{teather}', [TeathersController::class, 'show'])->name('teather.show');
-        Route::get('/{teather}/edit', [TeathersController::class, 'edit'])->name('teather.edit');   
+        Route::get('/{teather}/edit', [TeathersController::class, 'edit'])->name('teather.edit'); 
+        route::post('/', [TeathersController::class, 'store'])->name('teather.store'); 
+        route::patch('/{teather}', [TeathersController::class, 'update'])->name('teather.update');
+        route::delete('/{teather}', [TeathersController::class, 'destroy'])->name('teather.destroy');
     });
     Route::group(['prefix' => 'lessons'], function(){
         route::get('/', [LessonsController::class,'index'])->name('lesson.index');
