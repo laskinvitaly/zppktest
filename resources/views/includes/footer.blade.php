@@ -1,4 +1,4 @@
 <footer class="main-footer">
-  <strong>Разработчик <a href="#">Ласкин В.О.</a></strong>   
+  <strong>Разработчики студенты ЗППК под руководством преподавателя Ласкина В.О.</strong>   
   
 </footer>

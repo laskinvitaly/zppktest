@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -11,7 +12,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-       return view('categories.index');
+       return view('admin.categories.index');
         //
     }
 
@@ -21,7 +22,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -37,7 +38,7 @@ class CategoriesController extends Controller
      */
     public function show(string $id)
     {
-        return view('categories.show');
+        return view('admin.categories.show');
         //
     }
 
@@ -47,7 +48,7 @@ class CategoriesController extends Controller
     public function edit(string $id)
     {
         //
-        return view('categories.edit');
+        return view('admin.categories.edit');
     }
 
     /**
@@ -64,6 +65,5 @@ class CategoriesController extends Controller
     public function delete(string $id)
     {
         //
-        return view('categories.delete');
     }
 }
