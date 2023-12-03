@@ -19,4 +19,16 @@ class TeathersController extends Controller
     public function edit(){
         return view('admin.teathers.edit');
     }
+    public function update(Request $request, string $id)
+    {
+        dd("Преподаватели изменены");
+    }
+    public function destroy(string $id)
+    {
+        dd("Преподаватели удалены");
+    }
+    public function store(Request $request)
+    {
+        dd("Преподаватели созданы");
+    }
 }

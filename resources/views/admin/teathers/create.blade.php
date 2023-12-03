@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('content')
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,8 +11,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right"> 
-              <li class="breadcrumb-item"><a href="">Главная</a></li>
-              <li class="breadcrumb-item"><a href="">Преподаватели</a></li>             
+              <li class="breadcrumb-item"><a href="{{ route('main') }}">Главная</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('teather.index') }}">Преподаватели</a></li>             
               <li class="breadcrumb-item active">Создание</li>
             </ol>
           </div><!-- /.col -->
@@ -31,7 +32,38 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                  
+                  <form class="p-3" action="<?php echo e(route('teather.store')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                      <div class="form-group">
+                        <label for="">Имя Преподавателя</label>
+                        <input type="text" class="form-control" placeholder="Введите название">
+                      </div>
+                      <div class="form-group">
+                        <label for="">Преподаватели</label>
+                        <select class="custom-select rounded-0" id="">
+                          <option>Преподаватели</option>
+                          <option>Преподаватель</option>
+                          <option>Другие новости о преподавателях</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Контент</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Главное изображение</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="exampleInputFile">Фотография</label>
+                          </div>
+                          <div class="input-group-append">
+                            <span class="input-group-text">Upload</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Создать</button>                    
+                  </form>
               </div>
               <!-- /.card-body -->
             </div>
@@ -44,3 +76,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  @endsection
