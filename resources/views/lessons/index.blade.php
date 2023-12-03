@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Цвета</h1>
+            <h1 class="m-0">уроки</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right"> 
               <li class="breadcrumb-item"><a href="">Главная</a></li>             
-              <li class="breadcrumb-item active">Цвета</li>
+              <li class="breadcrumb-item active">уроки</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,7 +26,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Список цветов</h3>
+                <h3 class="card-title">Список уроков</h3>
 
                 <div class="card-tools">
                     <a class="btn btn-block btn-primary" href="">Создать</a>
