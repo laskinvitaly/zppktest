@@ -19,8 +19,11 @@ use App\Http\Controllers\Admin\NewsController;
 |
 */
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('front.index');
+})->name('frontpage');
+Route::get('/empty', function () {
+    return view('front.empty');
+})->name('empty');
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', [AdminController::class, 'index'])->name('main');
