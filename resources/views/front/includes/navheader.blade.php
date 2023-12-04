@@ -20,6 +20,7 @@
     <li><a href="{{ route('empty')}}">Аттестация</a></li>
     <li><span>Абитуриентам</span>
       <ul class="sub-menu">
+        <li><a href="{{ route('front.entrant.edit', 1)}}">Личный кабинет</a></li>
         <li><a href="{{ route('empty')}}">Информация поступающим</a></li>
         <li><a href="{{ route('empty')}}">Приемная кампания</a></li>
         <li><a href="{{ route('empty')}}">Информация для лиц с ОВЗ</a></li>

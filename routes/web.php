@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TeathersController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Front\PageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +19,11 @@ use App\Http\Controllers\Admin\NewsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('front.index');
-})->name('frontpage');
-Route::get('/empty', function () {
-    return view('front.empty');
-})->name('empty');
+Route::get('/', [PageController::class, 'index'])->name('frontpage');
+Route::get('/empty', [PageController::class, 'empty'])->name('empty');
+Route::group(['prefix' => 'entrant'], function(){
+    Route::get('/{entrant}/edit', [PageController::class, 'entrantedit'])->name('front.entrant.edit');
+});
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/', [AdminController::class, 'index'])->name('main');

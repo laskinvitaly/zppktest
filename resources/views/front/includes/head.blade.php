@@ -10,4 +10,5 @@
   <link rel="stylesheet" href="{{asset('front/css/mburger.css')}}" type="text/css" media="all">
   <link rel="stylesheet" href="{{asset('front/css/mmenu.css')}}" type="text/css" media="all">
   <link rel="stylesheet" href="{{asset('front/css/style.css')}}" type="text/css" media="all">
+  <link rel="stylesheet" href="{{asset('front/css/razrab1.css')}}" type="text/css" media="all">
 </head>
