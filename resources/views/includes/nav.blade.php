@@ -95,7 +95,34 @@
               </a>
             </li>                        
           </ul>
-        </li>       
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              Администрирование
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('role.index')}}" class="nav-link">
+                <i class="nav-icon fas fa-shopping-bag"></i>
+                <p>
+                  Роли
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('main') }}" class="nav-link">
+                <i class="nav-icon fas fa-shopping-bag"></i>
+                <p>
+                  Заявки на регистрацию
+                </p>
+              </a> 
+            </li>                      
+          </ul>
+        </li>        
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TeathersController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
 /*
 |--------------------------------------------------------------------------
@@ -72,4 +73,17 @@ Route::group(['prefix' => 'admin'], function(){
         route::patch('/{new}', [NewsController::class, 'update'])->name('new.update');
         route::delete('/{new}', [NewsController::class, 'destroy'])->name('new.destroy');
     });
+    Route::group(['prefix' => 'roles'], function(){
+        route::get('/',  [RolesController::class, 'index'])->name('role.index');
+        route::get('/create', [RolesController::class, 'create'])->name('role.create');
+        route::post('/', [RolesController::class, 'store'])->name('role.store');
+        route::get('/{slug}', [RolesController::class, 'show'])->name('role.show');
+        route::get('/{slug}/edit', [RolesController::class, 'edit'])->name('role.edit');
+        route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
+        route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
+    });
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
