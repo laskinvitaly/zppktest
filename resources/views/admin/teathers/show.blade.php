@@ -51,26 +51,39 @@
                       <p>100</p>
                     </div>
                     <div class="col-2">
-                      <p><strong>Название </strong></p>
+                      <p><strong>Фамилия </strong></p>
                     </div>
                     <div class="col-10">
-                      <p>Преподаватели</p>
+                      <p>Воронов</p>
                     </div>
                     <div class="col-2">
-                      <p><strong>Преподаватели</strong></p>
+                      <p><strong>Имя</strong></p>
                     </div>
                     <div class="col-10">
-                      <p>Преподаватель</p>
+                      <p>Игорь</p>
                     </div>
                     <div class="col-2">
-                      <p><strong>Контент</strong></p>
+                      <p><strong>Отчество</strong></p>
                     </div>
                     <div class="col-10">
-                      <p>Информация о Преподавателе</p>
+                      <p>Петрович</p>
                     </div>
                     <div class="col-2">
-                      <p><strong>Главная фотография Преподавателя</strong></p>
+                      <p><strong>Должность</strong></p>
                     </div>
+                    <div class="col-10">
+                      <p>Младший научный сотрудник</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="" style="margin-left: 7px;">Фотография Преподавателя</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="exampleInputFile">Фотография</label>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
                     <div class="col-10">
                       <div class="news-photo" style="color: #fff; background: #333; width: 100px; height: 150px; border-radius: 7px; display: flex; justify-content: center; align-items: center;">Фото</div>
                     </div>
