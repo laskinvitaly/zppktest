@@ -39,7 +39,10 @@
                   <thead>
                     <tr>
                       <th style="width: 20px;">Id</th>
-                      <th class="text-left">Название</th>                      
+                      <th class="text-left">Фамилия</th>                      
+                      <th class="text-left">Имя</th>
+                      <th class="text-left">Отчество</th>
+                      <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
@@ -48,7 +51,10 @@
                   <tbody>
                     <tr>
                       <td>100</td>
-                      <td>Преподаватели</td>
+                      <td>Воронов</td>
+                      <td>Игорь</td>
+                      <td>Петрович</td>
+                      <td></td>
                       <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.show',1)); ?>"><i class="far fa-eye"></i></a></td>
                       <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.edit',1)); ?>"><i class="fas fa-pen"></i></a></td>
                       <td>

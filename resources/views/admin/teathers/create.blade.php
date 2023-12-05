@@ -36,22 +36,22 @@
                     <?php echo csrf_field(); ?>
                       <div class="form-group">
                         <label for="">Имя Преподавателя</label>
-                        <input type="text" class="form-control" placeholder="Введите название">
+                        <input type="text" class="form-control" placeholder="Введите имя">
                       </div>
                       <div class="form-group">
-                        <label for="">Преподаватели</label>
-                        <select class="custom-select rounded-0" id="">
-                          <option>Преподаватели</option>
-                          <option>Преподаватель</option>
-                          <option>Другие новости о преподавателях</option>
-                        </select>
+                        <label for="">Фамилия Преподавателя</label>
+                        <input type="text" class="form-control" placeholder="Введите фамилия">
                       </div>
                       <div class="form-group">
-                        <label for="">Контент</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <label for="">Отчество Преподавателя</label>
+                        <input type="text" class="form-control" placeholder="Введите отчество">
                       </div>
                       <div class="form-group">
-                        <label for="">Главное изображение</label>
+                        <label for="">Должность Преподавателя</label>
+                        <input type="text" class="form-control" placeholder="Введите должность">
+                      </div>
+                      <div class="form-group">
+                        <label for="">Фотография Преподавателя</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="exampleInputFile">

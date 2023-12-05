@@ -21,14 +21,14 @@ class TeathersController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        dd("Преподаватели изменены");
+        dd("Преподаватель изменен");
     }
     public function destroy(string $id)
     {
-        dd("Преподаватели удалены");
+        dd("Преподаватель удален");
     }
     public function store(Request $request)
     {
-        dd("Преподаватели созданы");
+        dd("Преподаватель создан");
     }
 }

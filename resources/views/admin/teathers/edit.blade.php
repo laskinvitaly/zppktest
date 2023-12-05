@@ -36,27 +36,31 @@
                     @csrf
                     @method('patch')
                       <div class="form-group">
-                        <label for="">Название</label>
-                        <input type="text" class="form-control" placeholder="Введите название">
+                        <label for="">Фамилия</label>
+                        <input type="text" class="form-control" placeholder="Введите фамилию" value="Воронов">
                       </div>
                       <div class="form-group">
-                        <label for="">Преподаватели</label>
-                        <select class="custom-select rounded-0" id="">
-                          <option>Преподаватели</option>
-                          <option>Преподаватель</option>
-                          <option>Другие новости о преподавателях</option>
-                        </select>
+                        <label for="">Имя</label>
+                        <input type="text" class="form-control" placeholder="Введите имя" value="Игорь">
+                       </div>
+                       <div class="form-group">
+                        <label for="">Отчество</label>
+                        <input type="text" class="form-control" placeholder="Введите отчество" value="Петрович">
+                       </div>
+                       <div class="form-group">
+                        <label for="">Должность</label>
+                        <input type="text" class="form-control" placeholder="Введите должность" value="Младший научный сотрудник">
+                       </div>
+                      <div class="form-group">
+                        <label for="">Информация о преподавателе</label>
+                        <textarea class="form-control" rows="3" placeholder=""></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="">Контент</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="">Главное изображение</label>
+                        <label for="">Фотография Преподавателя</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="exampleInputFile">
-                            <label class="custom-file-label" for="exampleInputFile">Фотография Преподавателя</label>
+                            <label class="custom-file-label" for="exampleInputFile">Фотография</label>
                           </div>
                           <div class="input-group-append">
                             <span class="input-group-text">Upload</span>
