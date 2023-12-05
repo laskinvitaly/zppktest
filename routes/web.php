@@ -92,3 +92,4 @@ Route::group(['prefix' => 'admin'], function(){
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Это Игорь
