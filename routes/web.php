@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/create', [GroupsController::class, 'create'])->name('group.create');
         Route::get('/{group}', [GroupsController::class, 'show'])->name('group.show');
         Route::get('/{group}/edit', [GroupsController::class, 'edit'])->name('group.edit');
+        route::post('/', [GroupsController::class, 'store'])->name('group.store');
+        route::patch('/{group}', [GroupsController::class, 'update'])->name('group.update');
+        route::delete('/{group}', [GroupsController::class, 'destroy'])->name('group.destroy');
     }); 
     Route::group(['prefix' => 'entrants'], function(){
         Route::get('/', [EntrantsController::class, 'index'])->name('entrant.index');
