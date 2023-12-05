@@ -147,3 +147,23 @@ document.addEventListener( "DOMContentLoaded", () => {
 
 
 
+let phoneInput = document.querySelector(".input-phone");
+let btn = document.querySelector(".btn-phone");
+
+
+const phoneMask = new IMask(phoneInput, {
+  mask: "+{7}(000)000-00-00",
+});
+
+
+phoneInput.addEventListener("input", phoneInputHandler);
+
+btn.addEventListener("click", btnHandler);
+
+function phoneInputHandler() {
+  if (phoneMask.masked.isComplete) {
+    btn.classList.add("active");
+  } else {
+    btn.classList.remove("active");
+  }
+}

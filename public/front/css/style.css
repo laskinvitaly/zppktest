@@ -768,9 +768,14 @@ a.ya-disk:before{
 
 .anketa__wrap{padding-bottom:30px;padding-top:30px;display:flex;flex-wrap:nowrap}.anketa__img{width:100%}.anketa__content{padding:10px 30px 10px;display:flex;flex-direction:column;justify-content:space-between}.anketa___text{width:100%}.anketa__img{display:flex;justify-content:center;align-items:center}.anketa__img img{width:100%;max-width:400px;border-radius:20px}.anketa h3{text-align:center;padding-bottom:15px;color:#CB7069;text-transform:uppercase}.anketa p{padding-bottom:5px}.anketa__btn{padding-top:20px;height:60px}a.btn{max-width:200px;width:100%;margin:0 auto;padding-top:5px;padding-bottom:5px;display:block;text-align:center;text-decoration:none;font-size:18px;line-height:24px;cursor:pointer;background:#0d4cd3;color:#fff;border:none;border-radius:8px}@media (max-width:790px){.anketa__wrap{flex-wrap:wrap}}
 
+.btn-phone {    
+    pointer-events: none; 
+  }
 
-
-
+.btn-phone.active {
+    pointer-events: auto;
+    cursor: pointer;
+  }
 
 
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,8 +83,12 @@ Route::group(['prefix' => 'admin'], function(){
         route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
         route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
     });
+    Route::group(['prefix' => 'register'], function(){
+        route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
+    });
 });
 
-Auth::routes();
-
+//Auth::routes();
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

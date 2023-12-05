@@ -114,7 +114,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('main') }}" class="nav-link">
+              <a href="{{ route('register.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-shopping-bag"></i>
                 <p>
                   Заявки на регистрацию
