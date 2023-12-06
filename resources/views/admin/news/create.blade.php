@@ -44,6 +44,7 @@
                           <option>Конкурсы/олимпиады</option>
                           <option>Спортивные мероприятия</option>
                           <option>Другие новости</option>
+                          
                         </select>
                       </div>
                       <div class="form-group">
@@ -62,7 +63,8 @@
                           </div>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-primary">Создать</button>                    
+                      <button type="submit" class="btn btn-primary">Создать</button>  
+                                 
                   </form>
               </div>
               <!-- /.card-body -->

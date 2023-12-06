@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\TeathersController;
 use App\Http\Controllers\Admin\LessonsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Front\PageController;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +21,10 @@ use App\Http\Controllers\Admin\NewsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [PageController::class, 'index'])->name('frontpage');
+Route::get('/empty', [PageController::class, 'empty'])->name('empty');
+Route::group(['prefix' => 'entrant'], function(){
+    Route::get('/{entrant}/edit', [PageController::class, 'entrantedit'])->name('front.entrant.edit');
 });
 
 Route::group(['prefix' => 'admin'], function(){
@@ -29,24 +34,36 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/create', [GroupsController::class, 'create'])->name('group.create');
         Route::get('/{group}', [GroupsController::class, 'show'])->name('group.show');
         Route::get('/{group}/edit', [GroupsController::class, 'edit'])->name('group.edit');
+        route::post('/', [GroupsController::class, 'store'])->name('group.store');
+        route::patch('/{group}', [GroupsController::class, 'update'])->name('group.update');
+        route::delete('/{group}', [GroupsController::class, 'destroy'])->name('group.destroy');
     }); 
     Route::group(['prefix' => 'entrants'], function(){
         Route::get('/', [EntrantsController::class, 'index'])->name('entrant.index');
         Route::get('/create', [EntrantsController::class, 'create'])->name('entrant.create');
-        Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrants.show');
+        Route::post('/', [EntrantsController::class, 'store'])->name('entrant.store');
+        Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrant.show');
+        Route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
         Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
-    });
+        Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
+    }); 
     Route::group(['prefix' => 'teathers'], function(){
         Route::get('/', [TeathersController::class, 'index'])->name('teather.index');
         Route::get('/create', [TeathersController::class, 'create'])->name('teather.create');
         Route::get('/{teather}', [TeathersController::class, 'show'])->name('teather.show');
-        Route::get('/{teather}/edit', [TeathersController::class, 'edit'])->name('teather.edit');   
+        Route::get('/{teather}/edit', [TeathersController::class, 'edit'])->name('teather.edit'); 
+        route::post('/', [TeathersController::class, 'store'])->name('teather.store'); 
+        route::patch('/{teather}', [TeathersController::class, 'update'])->name('teather.update');
+        route::delete('/{teather}', [TeathersController::class, 'destroy'])->name('teather.destroy');
     });
     Route::group(['prefix' => 'lessons'], function(){
         route::get('/', [LessonsController::class,'index'])->name('lesson.index');
         route::get('/create', [LessonsController::class,'create'])->name('lesson.create');
         route::get('/{lesson}/edit', [LessonsController::class,'edit'])->name('lesson.edit');       
-        route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show');    
+        route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show'); 
+        route::post('/', [LessonsController::class, 'store'])->name('lesson.store');
+        route::patch('/{group}', [LessonsController::class, 'update'])->name('lesson.update');
+        route::delete('/{group}', [LessonsController::class, 'destroy'])->name('lesson.destroy');   
     });
     Route::group(['prefix' => 'categories'], function(){
         Route::get('/', [CategoriesController::class, 'index'])->name('category.index');
@@ -63,4 +80,21 @@ Route::group(['prefix' => 'admin'], function(){
         route::patch('/{new}', [NewsController::class, 'update'])->name('new.update');
         route::delete('/{new}', [NewsController::class, 'destroy'])->name('new.destroy');
     });
+    Route::group(['prefix' => 'roles'], function(){
+        route::get('/',  [RolesController::class, 'index'])->name('role.index');
+        route::get('/create', [RolesController::class, 'create'])->name('role.create');
+        route::post('/', [RolesController::class, 'store'])->name('role.store');
+        route::get('/{slug}', [RolesController::class, 'show'])->name('role.show');
+        route::get('/{slug}/edit', [RolesController::class, 'edit'])->name('role.edit');
+        route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
+        route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
+    });
+    Route::group(['prefix' => 'register'], function(){
+        route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
+    });
 });
+
+//Auth::routes();
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
