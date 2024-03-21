@@ -24,10 +24,10 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::get('/', [PageController::class, 'index'])->name('frontpage');
 Route::get('/empty', [PageController::class, 'empty'])->name('empty');
 Route::group(['prefix' => 'entrant'], function(){
-    Route::get('/{entrant}/edit', [PageController::class, 'entrantedit'])->name('front.entrant.edit');
+    Route::get('/{user}/edit', [App\Http\Controllers\Front\EntrantsController::class, 'edit'])->middleware('auth', 'Entrant')->name('front.entrant.edit');
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth', 'Adminpanel'])->group(function(){
     Route::group(['prefix' => 'admin'], function(){
         Route::get('/', [AdminController::class, 'index'])->name('main');
         Route::group(['prefix' => 'groups'], function(){

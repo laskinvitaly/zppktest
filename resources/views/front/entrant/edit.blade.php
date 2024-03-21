@@ -1,6 +1,7 @@
 @extends('front.layouts.main')
 @section('content')
   <h1 class="entrant-title">Личный кабинет абитуриента</h1>
+  
   <table class="entarnt-table">
     <thead class="table-body">
       <tr>
@@ -14,9 +15,9 @@
     </thead>
     <tbody class="table-body">
       <tr>
-        <td>Иванов</td>
-        <td>Иван</td>
-        <td>Иванович</td>
+        <td>{{ $user->family }}</td>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->patronymic }}</td>
         <td>+78005553535</td>
         <td>ivan@mail.com</td>
         <td>Зубова Поляна, улица Новикова-Прибоя, 22</td>

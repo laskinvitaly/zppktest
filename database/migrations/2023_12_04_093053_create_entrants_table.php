@@ -13,16 +13,14 @@ return new class extends Migration
     {
         Schema::create('entrants', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('patronymic');
-            $table->string('email')->unique();
-            $table->string('vkontakte');
-            $table->string('passport');
-            $table->string('document_on_education');
-            $table->string('medical_certificate');
-            $table->string('vaccination_certificate');
-            $table->string('snils');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('vkontakte')->nullable();
+            $table->string('passport')->nullable();
+            $table->string('document_on_education')->nullable();
+            $table->string('medical_certificate')->nullable();
+            $table->string('vaccination_certificate')->nullable();
+            $table->string('snils')->nullable();
+            $table->string('phone', 20);
         });
     }
 

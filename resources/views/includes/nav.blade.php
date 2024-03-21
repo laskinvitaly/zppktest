@@ -8,7 +8,7 @@
   <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     
     <div class="info">
-      <a href="#" class="d-block">Пользователь</a>
+      <a href="#" class="d-block">Пользователь</a> {{ auth()->user()->id }}
       <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit" class="btn btn-block btn-dark btn-sm mt-3">Выход</button>

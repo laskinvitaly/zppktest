@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -23,9 +24,42 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     public function showLoginForm()
-    {
+    {   
+        if (Auth::check()) {
+            if ((int) Auth::user()->role_id === 0){
+                return redirect()->route('main');
+            }
+            if ((int) Auth::user()->role_id === 1){
+                return redirect()->route('front.entrant.edit', Auth::user());
+            }
+        }     
         return view('auth.login');
     }
+
+    public function login(Request $request){
+        $credentials = $request->validate([
+            'login' => ['required'],
+            'password' => ['required'],
+        ]);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            if ((int) Auth::user()->role_id === 0){
+                return redirect()->route('main');
+            }
+            if ((int) Auth::user()->role_id === 1){
+                return redirect()->route('front.entrant.edit', Auth::user());
+            }
+        }
+
+        return back()->withErrors([
+            'login' => 'Логин или пароль не верные',
+        ]);
+
+    }
+   
+    
+
     public function username()
     {
         return 'login';
@@ -68,6 +102,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+      //  $this->middleware('guest')->except('logout');
+        
     }
 }

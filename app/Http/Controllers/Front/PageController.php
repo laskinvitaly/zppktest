@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -15,8 +16,4 @@ class PageController extends Controller
     {
        return view('front.empty');       
     }    
-    public function entrantedit()
-    {
-       return view('front.entrantedit');       
-    }
 }

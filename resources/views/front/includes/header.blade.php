@@ -15,3 +15,14 @@
   @include('front.includes.navheader')        
 </div>
 </header> 
+@auth
+  
+
+<div class="container" style="background-color: #fff; padding: 20px;">
+  Пока пусть здесь кнопка, потом уберем
+  <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit" class="btn btn-block btn-dark btn-sm mt-3">Выход</button>
+</form>
+</div>
+@endauth
