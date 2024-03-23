@@ -35,7 +35,7 @@
         <li><a href="{{ route('empty')}}">Трудоустройство</a></li>
       </ul>
     </li>
-    <li><a href="{{ route('empty')}}">Новости</a></li>
+    <li><a href="{{ route('front.news.index')}}">Новости</a></li>
     <li><a href="{{ route('empty')}}">Наставничество</a></li>
     <li class="item-menu-more" style="display: none;">
       <a href="#">Еще</a>

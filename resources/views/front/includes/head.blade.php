@@ -12,4 +12,5 @@
   <link rel="stylesheet" href="{{asset('front/css/style.css')}}" type="text/css" media="all">
   <link rel="stylesheet" href="{{asset('front/css/razrab1.css')}}" type="text/css" media="all">
   <link rel="stylesheet" href="{{asset('front/css/razrab2.css')}}" type="text/css" media="all">
+  <link rel="stylesheet" href="{{asset('front/css/razrab3.css')}}" type="text/css" media="all">
 </head>
