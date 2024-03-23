@@ -23,6 +23,9 @@ use App\Http\Controllers\Auth\RegisterController;
 */
 Route::get('/', [PageController::class, 'index'])->name('frontpage');
 Route::get('/empty', [PageController::class, 'empty'])->name('empty');
+Route::group(['prefix' => 'certification'], function(){
+    Route::get('/', [App\Http\Controllers\Front\CertificationController::class, 'index'])->name('front.certification.index');
+});
 Route::group(['prefix' => 'entrant'], function(){
     Route::get('/{user}/edit', [App\Http\Controllers\Front\EntrantsController::class, 'edit'])->middleware('auth', 'Entrant')->name('front.entrant.edit');
 });

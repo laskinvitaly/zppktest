@@ -17,7 +17,7 @@
         <li><a href="{{ route('empty')}}">Документы</a></li>
       </ul>
     </li>
-    <li><a href="{{ route('empty')}}">Аттестация</a></li>
+    <li><a href="{{ route('front.certification.index')}}">Аттестация</a></li>
     <li><span>Абитуриентам</span>
       <ul class="sub-menu">
         <li><a href="{{ route('login')}}">Личный кабинет</a></li> 

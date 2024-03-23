@@ -11,16 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrants', function (Blueprint $table) {
+        Schema::create('teathers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('vkontakte')->nullable();
-            $table->string('passport')->nullable();
-            $table->string('document_on_education')->nullable();
-            $table->string('medical_certificate')->nullable();
-            $table->string('vaccination_certificate')->nullable();
-            $table->string('snils')->nullable();
-            $table->string('phone', 20);
+            //Сведения, характерные для преподавателей
             $table->timestamps();
         });
     }
