@@ -31,23 +31,29 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                @foreach ($requestRegisters as $requestRegister) 
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($requestRegisters as $requestRegister)
+                @php
+                    $i++;
+                @endphp
                 <div id="accordion">
                   <div class="card card-primary">
                     <div class="card-header">
                       <h4 class="card-title w-100">
-                        <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
+                        <a class="d-block w-100" data-toggle="collapse" href="#collapseOne<?= $i ?>">
                           {{ $requestRegister['fio'] }}
                         </a>
-                      </h4>                     
+                      </h4>
                     </div>
-                    <div id="collapseOne" class="collapse @if ($loop->first) show @endif" data-parent="#accordion">
+                    <div id="collapseOne<?= $i ?>" class="collapse @if ($loop->first) show @endif" data-parent="#accordion">
                       <div class="card-body">
-                        <form class="p-3" action="" method="POST">
+                        <form class="p-3" action="{{ route('register.approve', $requestRegister->id)  }}" method="POST">
                           @csrf
                             <div class="form-group">
-                              <label for="sername">Фамилия</label>
-                              <input type="text" name="sername" class="form-control @error('fio') is-invalid @enderror" placeholder="Введите фамилию" value="{{ $requestRegister->sername() }}" required autofocus>
+                              <label for="family">Фамилия</label>
+                              <input type="text" name="family" class="form-control @error('fio') is-invalid @enderror" placeholder="Введите фамилию" value="{{ $requestRegister->sername() }}" required autofocus>
                               @error('sername')
                                 <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -64,8 +70,8 @@
                               @enderror
                             </div>
                             <div class="form-group">
-                              <label for="parentname">Отчество</label>
-                              <input type="text" name="parentname" class="form-control @error('parentname') is-invalid @enderror" placeholder="Введите отчество" value="{{ $requestRegister->parentname() }}" required>
+                              <label for="patronymic">Отчество</label>
+                              <input type="text" name="patronymic" class="form-control @error('parentname') is-invalid @enderror" placeholder="Введите отчество" value="{{ $requestRegister->parentname() }}" required>
                               @error('parentname')
                                 <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -73,9 +79,18 @@
                               @enderror
                             </div>
                             <div class="form-group">
-                              <label for="phone">Номер телефона</label>
-                              <input type="text" name="phone" class="form-control input-phone @error('phone') is-invalid @enderror" placeholder="+7(000)-00-00" value="{{ $requestRegister['phone'] }}" required>
-                              @error('phone')
+                              <label for="login">Номер телефона</label>
+                              <input type="text" name="login" class="form-control input-phone @error('login') is-invalid @enderror" placeholder="+7(000)-00-00" value="{{ $requestRegister['phone'] }}" required>
+                              @error('login')
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                                </span>
+                              @enderror
+                            </div>
+                            <div class="form-group">
+                              <label for="email">Электронная почта</label>
+                              <input type="text" name="email" class="form-control input-email @error('email') is-invalid @enderror" placeholder="example@mail.ru" value="{{ $requestRegister['email'] }}" required>
+                              @error('email')
                                 <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
                                 </span>
@@ -93,26 +108,18 @@
                             </div>
                                                         
                             <div class="form-group">
-                              <label for="role"></label>
-                              <select name="role" class="custom-select rounded-0" >
-                                @foreach (config('settings.roles') as $key => $role)
-                                <option value="{{ $role['value'] }}" @if ($role['value']==2) selected="selected" @endif>{{ $role['text'] }}</option>
-                                @endforeach                                
-                              </select>
-                            </div>
-                            <div class="form-group">
                               <label for="">Классный руководитель</label>
                               <textarea class="form-control" rows="1" placeholder="Введите классного руководителя"> Иванова Мария Ивановна
                               </textarea>
                             </div>
                             
-                            <button type="submit" class="btn btn-success">Одобрить</button> 
-                            <form action="" method="POST">
+                            <button type="submit" class="btn btn-success">Одобрить</button>
+                            <form action="{{ route('register.deleterequest', $requestRegister->id)  }}" method="POST">
                               @csrf
-                              @method('delete')
                               <button type="submit" class="btn btn-danger">Удалить</button>
-                            </form>                   
+                            </form>
                         </form>
+                        
                       </div>
                     </div>
                   </div>
