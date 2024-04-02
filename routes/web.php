@@ -97,7 +97,9 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
         });
         Route::group(['prefix' => 'register'], function(){
-            route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
+            route::get('/',  [RegisterController::class, 'index'])->name('register.index');
+            Route::post('/{entrant}/approve', [RegisterController::class, 'approve'])->name('register.approve');
+            Route::post('/{entrant}/deleterequest', [RegisterController::class, 'deleterequest'])->name('register.deleterequest');        
         });
     });
 });
