@@ -25,6 +25,8 @@ Route::get('/', [PageController::class, 'index'])->name('frontpage');
 Route::get('/empty', [PageController::class, 'empty'])->name('empty');
 Route::group(['prefix' => 'certification'], function(){
     Route::get('/', [App\Http\Controllers\Front\CertificationController::class, 'index'])->name('front.certification.index');
+    Route::get('/create', [App\Http\Controllers\Front\CertificationController::class, 'create'])->name('front.certification.create');
+    Route::post('/', [App\Http\Controllers\Front\CertificationController::class, 'store'])->name('front.certification.store');
 });
 Route::group(['prefix' => 'news'], function(){
     Route::get('/', [App\Http\Controllers\Front\NewsController::class, 'index'])->name('front.news.index');
@@ -53,7 +55,7 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrant.show');
             Route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
             Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
-            Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');            
+            Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
         }); 
         Route::group(['prefix' => 'teathers'], function(){
             Route::get('/', [TeathersController::class, 'index'])->name('teather.index');
@@ -95,9 +97,7 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
         });
         Route::group(['prefix' => 'register'], function(){
-            route::get('/',  [RegisterController::class, 'index'])->name('register.index'); 
-            Route::post('/{entrant}/approve', [RegisterController::class, 'approve'])->name('register.approve');
-            Route::post('/{entrant}/deleterequest', [RegisterController::class, 'deleterequest'])->name('register.deleterequest');
+            route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
         });
     });
 });

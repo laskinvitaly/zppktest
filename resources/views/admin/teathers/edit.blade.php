@@ -32,41 +32,27 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-              <form class="p-3" action="{{ route('teather.update',1) }}" method="POST">
+                  <form class="p-3" action="<?php echo e(route('teather.update', $t['id'])); ?>" method="POST">
                     @csrf
                     @method('patch')
                       <div class="form-group">
-                        <label for="">Название</label>
-                        <input type="text" class="form-control" placeholder="Введите название">
+                        <label for="">email Преподавателя</label>
+                        <input type="email" required name="email" class="form-control" value="{{ $t['email'] }}" placeholder="Введите email">
                       </div>
                       <div class="form-group">
-                        <label for="">Преподаватели</label>
-                        <select class="custom-select rounded-0" id="">
-                          <option>Преподаватели</option>
-                          <option>Преподаватель</option>
-                          <option>Другие новости о преподавателях</option>
-                        </select>
+                        <label for="">Фамилия Преподавателя</label>
+                        <input type="text" required name="family" class="form-control" value="{{ $t['family'] }}" placeholder="Введите фамилию">
                       </div>
                       <div class="form-group">
-                        <label for="">Контент</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <label for="">Имя Преподавателя</label>
+                        <input type="text" required name="name" class="form-control" value="{{ $t['name'] }}" placeholder="Введите имя">
                       </div>
                       <div class="form-group">
-                        <label for="">Главное изображение</label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                            <label class="custom-file-label" for="exampleInputFile">Фотография Преподавателя</label>
-                          </div>
-                          <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
-                          </div>
-                        </div>
+                        <label for="">Отчество Преподавателя</label>
+                        <input type="text" required name="patronymic" class="form-control" value="{{ $t['patronymic'] }}" placeholder="Введите отчество">
                       </div>
                       <button type="submit" class="btn btn-primary">Изменить</button>                    
                   </form>
-              </div>
-                  
               </div>
               <!-- /.card-body -->
             </div>
