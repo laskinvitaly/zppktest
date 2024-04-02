@@ -25,6 +25,8 @@ Route::get('/', [PageController::class, 'index'])->name('frontpage');
 Route::get('/empty', [PageController::class, 'empty'])->name('empty');
 Route::group(['prefix' => 'certification'], function(){
     Route::get('/', [App\Http\Controllers\Front\CertificationController::class, 'index'])->name('front.certification.index');
+    Route::get('/create', [App\Http\Controllers\Front\CertificationController::class, 'create'])->name('front.certification.create');
+    Route::post('/', [App\Http\Controllers\Front\CertificationController::class, 'store'])->name('front.certification.store');
 });
 Route::group(['prefix' => 'news'], function(){
     Route::get('/', [App\Http\Controllers\Front\NewsController::class, 'index'])->name('front.news.index');

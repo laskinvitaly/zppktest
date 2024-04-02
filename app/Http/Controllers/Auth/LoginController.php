@@ -50,6 +50,9 @@ class LoginController extends Controller
             if ((int) Auth::user()->role_id === 1){
                 return redirect()->route('front.entrant.edit', Auth::user());
             }
+            if ((int) Auth::user()->role_id === 3){
+                return redirect()->route('frontpage');
+            }
         }
 
         return back()->withErrors([

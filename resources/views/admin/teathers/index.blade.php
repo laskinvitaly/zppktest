@@ -46,19 +46,21 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($allTeachers as $t)
                     <tr>
-                      <td>100</td>
-                      <td>Преподаватели</td>
-                      <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.show',1)); ?>"><i class="far fa-eye"></i></a></td>
-                      <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.edit',1)); ?>"><i class="fas fa-pen"></i></a></td>
+                      <td>{{ $t['id'] }}</td>
+                      <td>{{ $t['family'] }} {{ $t['name'] }} {{ $t['patronymic'] }}</td>
+                      <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.show',$t['id'])); ?>"><i class="far fa-eye"></i></a></td>
+                      <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.edit',$t['id'])); ?>"><i class="fas fa-pen"></i></a></td>
                       <td>
-                        <form action="<?php echo e(route('teather.destroy', 1)); ?>" method="POST">
+                        <form action="<?php echo e(route('teather.destroy', $t['id'])); ?>" method="POST">
                           <?php echo csrf_field(); ?>
                           <?php echo method_field('delete'); ?>
                           <button type="submit" class="btn btn-block btn-danger"><i class="fas fa-trash-alt"></i></button>
                         </form>
                       </td>                      
                     </tr> 
+                    @endforeach
                   </tbody>
                 </table>
               </div>
