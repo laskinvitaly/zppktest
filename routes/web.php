@@ -31,6 +31,7 @@ Route::group(['prefix' => 'news'], function(){
 });
 Route::group(['prefix' => 'entrant'], function(){
     Route::get('/{user}/edit', [App\Http\Controllers\Front\EntrantsController::class, 'edit'])->middleware('auth', 'Entrant')->name('front.entrant.edit');
+  //  Route::get('/{entrants}', [App\Http\Controllers\Front\EntrantsController::class, 'update'])->middleware('auth', 'Entrant')->name('front.entrant.update');
 });
 
 Route::middleware(['auth', 'Adminpanel'])->group(function(){
