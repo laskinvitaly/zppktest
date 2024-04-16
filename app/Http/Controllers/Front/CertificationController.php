@@ -25,7 +25,7 @@ class CertificationController extends Controller
       
 
       $certifications = Teacher::all();
-
+    //  dd($certifications);
       foreach ($certifications as $c) {
         $author = User::find($c->user_id);
         $c["name"] = $author['family'] . ' ' . $author['name'] . ' ' . $author['patronymic'];
