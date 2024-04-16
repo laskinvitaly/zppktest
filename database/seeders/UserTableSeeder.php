@@ -663,7 +663,6 @@ class UserTableSeeder extends Seeder
                     'password' => Hash::make('trynkin'),
                     'role_id' => '3',
                 ],
-                
         ]);        
     }
 }
