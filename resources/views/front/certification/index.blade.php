@@ -7,7 +7,6 @@
       <a href="{{ route('front.certification.create') }}" class="btn">Добавить аттестацию</a>
     @endif
   @endauth
-
   <div class="cards__list">
     @foreach ($certifications as $c)
     <x-card :name="$c['name']" :photo="$c['photo_url']" :specialization="$c['specialization']" :experience="$c['experience']" />

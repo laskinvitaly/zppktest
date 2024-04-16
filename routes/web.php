@@ -33,6 +33,7 @@ Route::group(['prefix' => 'news'], function(){
 });
 Route::group(['prefix' => 'entrant'], function(){
     Route::get('/{user}/edit', [App\Http\Controllers\Front\EntrantsController::class, 'edit'])->middleware('auth', 'Entrant')->name('front.entrant.edit');
+  //  Route::get('/{entrants}', [App\Http\Controllers\Front\EntrantsController::class, 'update'])->middleware('auth', 'Entrant')->name('front.entrant.update');
 });
 
 Route::middleware(['auth', 'Adminpanel'])->group(function(){
@@ -96,7 +97,9 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
         });
         Route::group(['prefix' => 'register'], function(){
-            route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
+            route::get('/',  [RegisterController::class, 'index'])->name('register.index');
+            Route::post('/{entrant}/approve', [RegisterController::class, 'approve'])->name('register.approve');
+            Route::post('/{entrant}/deleterequest', [RegisterController::class, 'deleterequest'])->name('register.deleterequest');        
         });
     });
 });
