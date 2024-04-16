@@ -37,5 +37,4 @@ class EntrantsController extends Controller
     {
         dd("Абитуриент удалён");
     }
- 
 }

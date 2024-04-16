@@ -35,32 +35,28 @@
                   <form class="p-3" action="<?php echo e(route('teather.store')); ?>" method="POST">
                     <?php echo csrf_field(); ?>
                       <div class="form-group">
+                        <label for="">email Преподавателя</label>
+                        <input type="email" required name="email" class="form-control" placeholder="Введите email">
+                      </div>
+                      <div class="form-group">
+                        <label for="">Фамилия Преподавателя</label>
+                        <input type="text" required name="family" class="form-control" placeholder="Введите фамилию">
+                      </div>
+                      <div class="form-group">
                         <label for="">Имя Преподавателя</label>
-                        <input type="text" class="form-control" placeholder="Введите название">
+                        <input type="text" required name="name" class="form-control" placeholder="Введите имя">
                       </div>
                       <div class="form-group">
-                        <label for="">Преподаватели</label>
-                        <select class="custom-select rounded-0" id="">
-                          <option>Преподаватели</option>
-                          <option>Преподаватель</option>
-                          <option>Другие новости о преподавателях</option>
-                        </select>
+                        <label for="">Отчество Преподавателя</label>
+                        <input type="text" required name="patronymic" class="form-control" placeholder="Введите отчество">
                       </div>
                       <div class="form-group">
-                        <label for="">Контент</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <label for="">Логин преподавателя для входа</label>
+                        <input type="text" required name="login" class="form-control" placeholder="Введите логин">
                       </div>
                       <div class="form-group">
-                        <label for="">Главное изображение</label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                            <label class="custom-file-label" for="exampleInputFile">Фотография</label>
-                          </div>
-                          <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
-                          </div>
-                        </div>
+                        <label for="">Пароль преподавателя для входа</label>
+                        <input type="text" required name="password" class="form-control" placeholder="Введите пароль">
                       </div>
                       <button type="submit" class="btn btn-primary">Создать</button>                    
                   </form>

@@ -2,3 +2,28 @@
 .testlk{
     color: red;
 }
+
+.cards__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px
+}
+
+.card {
+    width: 18rem; 
+    display: flex; 
+    flex-direction: column; 
+    text-align: center; 
+    padding-left: 0; 
+    padding-right: 0;
+}
+
+.card-title {
+    font-size: 32px;
+}
+
+.card-text {
+    padding-bottom: 20px;
+}
