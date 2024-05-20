@@ -13,12 +13,7 @@ class EntrantTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('entrants')->insert([
-            [
-                'user_id' => 1,
-                'vkontakte' => 'https://vk.com/s.suuen',
-                'phone' => '+7(945)234-34-56',                
-            ],
+        DB::table('entrants')->insert([           
             [
                 'user_id' => 2,
                 'vkontakte' => 'https://vk.com/id29923814',
