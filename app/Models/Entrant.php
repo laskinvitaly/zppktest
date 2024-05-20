@@ -11,5 +11,10 @@ class Entrant extends Model
     protected $fillable = [
         'user_id',
         'phone',
+        'passport',
+        'document_on_education',
+        'medical_certificate',
+        'vaccination_certificate',
+        'snils',
     ];
 }
