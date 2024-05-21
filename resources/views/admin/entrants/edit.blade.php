@@ -40,7 +40,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif                
+            @endif
           <div class="card card-primary card-outline card-tabs">
             <form class="p-3" action="{{ route('entrant.update',  $entrant->id ) }}" method="POST" enctype="multipart/form-data">
               @csrf
@@ -74,23 +74,47 @@
                     <input name="patronymic" type="text" class="form-control" placeholder="Введите отчество" value="{{ $entrant->user->patronymic }}">
                   </div>
                   <div class="form-group">
-                    <label for="spetsialnost_id">Специальность</label>
-                    <select name="spetsialnost_id" class="custom-select">
-                      <option value="">--Выберите значение из списка--</option>
-                      {{-- @foreach ($categoryes as $category)
-                      <option value="{{ $category->id }}" @if($category->id==$product->category_id) selected @endif>{{ $category->name }}</option>
-                      @endforeach --}}
+                    <label for="spetsialnost">Специальность</label>
+                    <select name="spetsialnost" class="custom-select">
+                      
+                      @foreach ($spets as $sp)
+                      <option value="{{ $sp->id }}"@if($entrant->spetsialnost==$sp->id) selected @endif>{{ $sp->spets_name }}</option>
+                      @endforeach
+                      @if ($entrant->spetsialnost === null)
+                        <option disabled selected hidden>Выберите специальность</option>
+                      @endif
                     </select>
                   </div> 
-                  <div class="form-group">
-                    <label for="rating">Рейтинг</label>
-                    <input name="rating" type="text" class="form-control" placeholder="Введите рейтинг" value="0">
-                  </div> 
-                </div>
-                <div class="tab-pane fade" id="custom-tabs-two" role="tabpanel" aria-labelledby="custom-tabs-two">
                   
                   <div class="form-group">
-                    <label for="exampleInputFile">Паспорт абитуриента</label>
+                    <label for="rating">Рейтинг</label>
+                    <input name="rating" type="text" class="form-control" placeholder="Введите рейтинг" value="{{ $entrant->rating }}">
+                  </div> 
+
+                  <div class="form-check">
+                    <input name="sirota" type="checkbox" class="form-check-input" value="0" checked="true" style="display:none">
+                    <input name="sirota" type="checkbox" class="form-check-input" value="1" {{ ($entrant->sirota === 1) ? 'checked' : '' }}>
+                    <label for="sirota">Сирота</label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input name="outregion" type="checkbox" class="form-check-input" value="0" checked="true" style="display:none">
+                    <input name="outregion" type="checkbox" class="form-check-input" value="1" {{ ($entrant->outregion === 1) ? 'checked' : '' }}>
+                    <label for="outregion">Другой регион</label>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="vkontakte">VKontakte</label>
+                    <input name="vkontakte" type="text" class="form-control" placeholder="Введите отчество" value="{{ $entrant->vkontakte }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input name="phone" type="text" class="form-control" placeholder="Введите отчество" value="{{ $entrant->phone }}">
+                  </div>
+                </div>
+                
+                <div class="tab-pane fade" id="custom-tabs-two" role="tabpanel" aria-labelledby="custom-tabs-two">
+                  <div class="form-group">
+                    <label for="exampleInputFile" style="font-size: 20px">Паспорт абитуриента</label>
                     <p>
                       @if($entrant->passport)
                       <a href="{{ asset('storage/'.$entrant->passport) }}"  target="_blank">Скачать</a>                  
@@ -104,33 +128,127 @@
                     </div>
                   </div> 
                   <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="passport_seria">Серия</label>
-                      <input name="passport_seria" type="text" class="form-control" placeholder="0000" value="{{ $entrant->passport_seria }}">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="passport_seria">Серия</label>
+                        <input name="passport_seria" type="text" class="form-control" placeholder="0000" value="{{ $entrant->passport_seria }}">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="passport_number">Номер</label>
+                        <input name="passport_number" type="text" class="form-control" placeholder="000000" value="{{ $entrant->passport_number }}">
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="passport_number">Номер</label>
-                      <input name="passport_number" type="text" class="form-control" placeholder="000000" value="{{ $entrant->passport_number }}">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="passport_propiska">Прописка</label>
+                        <input name="passport_propiska" type="text" class="form-control" placeholder="Прописка" value="{{ $entrant->passport_propiska }}">
+                      </div>
+                    </div> 
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="passport_dr">Дата рождения</label>
+                        <input name="passport_dr" type="text" class="form-control" placeholder="00.00.0000" value="{{ $entrant->passport_dr }}">
+                      </div>
+                    </div> 
+                  </div>
+
+                  <div class="form-group mt-5">
+                    <label for="exampleInputFile" style="font-size: 20px">Документ об образовании</label>
+                    <p>
+                      @if($entrant->document_on_education)
+                      <a href="{{ asset('storage/'.$entrant->document_on_education) }}"  target="_blank">Скачать</a>                  
+                    @endif  
+                    </p>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="document_on_education" class="custom-file-input" accept=".jpg, .png, .pdf">
+                        <label class="custom-file-label" for="document_on_education">Выбрать изображение</label>
+                      </div>                            
                     </div>
                   </div> 
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="document_on_education_name">Название</label>
+                        <input name="document_on_education_name" type="text" class="form-control" placeholder="Название" value="{{ $entrant->document_on_education_name }}">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="document_on_education_year">Год выдачи</label>
+                        <input name="document_on_education_year" type="text" class="form-control" placeholder="Год" value="{{ $entrant->document_on_education_year }}">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group mt-5">
+                    <label for="exampleInputFile" style="font-size: 20px">СНИЛС абитуриента</label>
+                    <p>
+                      @if($entrant->snils)
+                      <a href="{{ asset('storage/'.$entrant->snils) }}"  target="_blank">Скачать</a>                  
+                    @endif  
+                    </p>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="snils" class="custom-file-input" accept=".jpg, .png, .pdf">
+                        <label class="custom-file-label" for="snils">Выбрать изображение</label>
+                      </div>                            
+                    </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="snils_number">Номер СНИЛС</label>
+                        <input name="snils_number" type="text" class="form-control" placeholder="000000000 00" value="{{ $entrant->snils_number }}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-5">
+                    <label for="exampleInputFile" style="font-size: 20px">Медецинский сертификат</label>
+                    <p>
+                      @if($entrant->medical_certificate)
+                      <a href="{{ asset('storage/'.$entrant->medical_certificate) }}"  target="_blank">Скачать</a>                  
+                    @endif  
+                    </p>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="medical_certificate" class="custom-file-input" accept=".jpg, .png, .pdf">
+                        <label class="custom-file-label" for="medical_certificate">Выбрать изображение</label>
+                      </div>                            
+                    </div>
+                  </div>
+                  <div class="form-group mt-5">
+                    <label for="exampleInputFile" style="font-size: 20px">Свидетельство о вакцинации</label>
+                    <p>
+                      @if($entrant->vaccination_certificate)
+                      <a href="{{ asset('storage/'.$entrant->vaccination_certificate) }}"  target="_blank">Скачать</a>                  
+                    @endif  
+                    </p>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="vaccination_certificate" class="custom-file-input" accept=".jpg, .png, .pdf">
+                        <label class="custom-file-label" for="vaccination_certificate">Выбрать изображение</label>
+                      </div>                            
+                    </div>
                   </div>
                 </div> 
+                
                 <div class="tab-pane fade" id="custom-tabs-three" role="tabpanel" aria-labelledby="custom-tabs-three">
                   
                   Добавлю поля
                  
-                                          
                  </div>                     
               </div>
             </div>
             <div class="card-footer">                    
               <div>
                 <button type="submit"  class="btn btn-primary my-3">Изменить</button>
-              </div>                 
-              
+              </div>
             </div>
           </form>
             <!-- /.card -->
