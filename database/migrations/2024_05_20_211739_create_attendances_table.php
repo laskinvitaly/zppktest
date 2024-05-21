@@ -11,26 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('attendances', function (Blueprint $table) {
             $table->string('family', 50);
             $table->string('name', 50);
             $table->string('patronymic', 50);
-            $table->string('email', 50)->unique();
-            $table->string('login', 50)->unique();
-            $table->foreignId('role_id')->constrained();
-            $table->string('password');
-            $table->string('link')->nullable()->unique();
-            $table->rememberToken();
+            $table->date('date_attendance');
+            $table->id();
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('attendances');
     }
 };

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\StudentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +57,7 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             Route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
             Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
             Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
-        }); 
+        });
         Route::group(['prefix' => 'teathers'], function(){
             Route::get('/', [TeathersController::class, 'index'])->name('teather.index');
             Route::get('/create', [TeathersController::class, 'create'])->name('teather.create');
@@ -95,6 +96,16 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::get('/{slug}/edit', [RolesController::class, 'edit'])->name('role.edit');
             route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
             route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
+        });
+        Route::group(['prefix' => 'students'], function(){
+            Route::get('/', [StudentsController::class, 'index'])->name('student.index');
+            Route::get('/create', [StudentsController::class, 'create'])->name('student.create');
+            Route::get('/{student}', [StudentsController::class, 'show'])->name('student.show');
+            Route::get('/{student}/edit', [StudentsController::class, 'edit'])->name('student.edit'); 
+            Route::get('/{student}/link', [StudentsController::class, 'link'])->name('student.link'); 
+            route::post('/', [StudentsController::class, 'store'])->name('student.store'); 
+            route::patch('/{student}', [StudentsController::class, 'update'])->name('student.update');
+            route::delete('/{student}', [StudentsController::class, 'destroy'])->name('student.destroy');
         });
         Route::group(['prefix' => 'register'], function(){
             route::get('/',  [RegisterController::class, 'index'])->name('register.index');

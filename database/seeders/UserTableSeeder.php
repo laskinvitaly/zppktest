@@ -663,6 +663,15 @@ class UserTableSeeder extends Seeder
                     'password' => Hash::make('trynkin'),
                     'role_id' => '3',
                 ],
-        ]);        
+                [
+                    'family' => 'Фёдоров',
+                    'name' => 'Василий',
+                    'patronymic' => 'Сергеевич',
+                    'email' => 'fedorkin@gmail.com',
+                    'login' => 'fedorkin',
+                    'password' => Hash::make('fedorkin'),
+                    'role_id' => '5',
+                ],
+        ]);
     }
 }
