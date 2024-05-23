@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\StudentsController;
+use App\Http\Controllers\Admin\VisitController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,8 @@ Route::group(['prefix' => 'entrant'], function(){
 Route::middleware(['auth', 'Adminpanel'])->group(function(){
     Route::group(['prefix' => 'admin'], function(){
         Route::get('/', [AdminController::class, 'index'])->name('main');
+        Route::get('/{student}/visit', [VisitController::class, 'index']);
+        Route::get('/visit', [VisitController::class, 'show'])->name('show.visit');;
         Route::group(['prefix' => 'groups'], function(){
             Route::get('/', [GroupsController::class, 'index'])->name('group.index');
             Route::get('/create', [GroupsController::class, 'create'])->name('group.create');
