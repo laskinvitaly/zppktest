@@ -4,23 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Entrant;
 
 class EntrantsController extends Controller
 {
     public function index() {
-        return view('admin.entrants.index');
+        $entrants = Entrant::all();
+        return view('admin.entrants.index', compact('entrants'));
     }
 
     public function create() {
         return view('admin.entrants.create');
     }
 
-    public function show() {
-        return view('admin.entrants.show');
-    }
-
-    public function edit() {
-        return view('admin.entrants.edit');
+    public function edit(Entrant $entrant) {
+        return view('admin.entrants.edit', compact('entrant'));
     }
 
     public function store(Request $request)
@@ -28,9 +26,17 @@ class EntrantsController extends Controller
         dd("Абитуриент добавлен");
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Entrant $entrant)
     {
-        dd("Информация об абитуриенте изменена");
+        $data = $request->validate([
+            'name' => 'required|string',
+            'family' => 'required|string',
+            'patronymic' => 'required|string',
+            'passport' => 'nullable|file',
+            'passport_seria' => ['nullable', 'string', 'regex:/^\d{4}$/'],
+            'passport_number' => ['nullable', 'string', 'regex:/^\d{6}$/'],
+        ]);
+        dd($data);
     }
 
     public function destroy(string $id)
