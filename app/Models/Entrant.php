@@ -14,12 +14,24 @@ class Entrant extends Model
 
     protected $fillable = [
         'user_id',
-        'phone',
+        'vkontakte',
+        'spetsialnost',
+        'rating',
+        'sirota',
+        'outregion',
         'passport',
+        'passport_seria',
+        'passport_number',
+        'passport_propiska',
+        'passport_dr',
         'document_on_education',
+        'document_on_education_name',
+        'document_on_education_year',
+        'snils',
+        'snils_number',
         'medical_certificate',
         'vaccination_certificate',
-        'snils',
+        'phone',
     ];
 
     public function user()

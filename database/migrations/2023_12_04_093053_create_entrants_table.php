@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('passport_propiska')->nullable();
             $table->string('passport_dr')->nullable();
             $table->string('document_on_education')->nullable();
+            $table->string('document_on_education_name')->nullable();
+            $table->string('document_on_education_year', 4)->nullable();
             $table->string('medical_certificate')->nullable();
             $table->string('vaccination_certificate')->nullable();
             $table->string('snils')->nullable();

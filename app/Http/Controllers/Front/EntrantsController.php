@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Entrant;
+use App\Models\Spetsialnost;
 use Illuminate\Support\Facades\Storage;
 
 class EntrantsController extends Controller
@@ -15,18 +16,21 @@ class EntrantsController extends Controller
       //    return view('front.entrant.edit');
       // }
       //    return view('front.entrant.login');
+      $spets = Spetsialnost::all();
 
-      return view('front.entrant.edit', compact('user')); 
+      return view('front.entrant.edit', compact('user', 'spets')); 
     } 
 
     public function update(Request $request, string $id)
     {
+
       $data = $request->validate([
         'passport' => 'nullable|file',
         'document_on_education' => 'nullable|file',
         'medical_certificate' => 'nullable|file',
         'vaccination_certificate' => 'nullable|file',
         'snils' => 'nullable|file',
+        'spetsialnost' => 'nullable|integer',
       ]);
 
       if($request->hasFile('passport')){
