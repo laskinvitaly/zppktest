@@ -50,7 +50,15 @@
                   Абитуриенты
                 </p>
               </a>
-            </li>                      
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('student.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-solid fa-user"></i>
+                <p>
+                  Студенты
+                </p>
+              </a>
+            </li>
           </ul>
         </li>
         <li class="nav-item">
