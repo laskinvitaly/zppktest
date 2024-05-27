@@ -91,7 +91,6 @@ class StudentsController extends Controller
     {   
         $unique_url = URL::to('/admin/students') ."/". uniqid(md5(rand()), true);
 
-        // $stud_qrcode = QrCode::size(300)->generate($unique_url);
         
         $t = User::find($student);
         if(!$t) {
