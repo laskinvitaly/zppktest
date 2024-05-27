@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Attendance;
+use App\Models\User;
+use DateTime;
+use DateTimeZone;
 
 class VisitController extends Controller
 {
@@ -12,7 +16,24 @@ class VisitController extends Controller
      */
     public function index(Request $request)
     {
-      dd('Занесение студента в таблицу посещаемость');
+      
+      $data = ([
+        'student_id' => "required|string",
+        'date_attendance' => 'required|string',
+      ]); 
+      
+      $url_segment = $request->segment(2);
+      $data['student_id'] = User::where('link', $url_segment)->first()['id'];
+
+      $time = new DateTime("");
+      $time->setTimezone(new DateTimeZone("Europe/Moscow"));
+      $time = $time->format("Y-m-d H:i:s");
+      $data['date_attendance'] = $time;
+
+      Attendance::CreateOrFirst($data);
+
+
+      return redirect()->route('show.visit');
     }
 
     /**
@@ -20,7 +41,12 @@ class VisitController extends Controller
      */
     public function show()
     {
-        dd('Показ таблицы посещаемость в админ панели');
+      $attendance = Attendance::all();
+      $attendance = $attendance->reverse();
+      $user = User::where('role_id', '2')->get();
+      $user = $user->reverse();
+      
+      return view('admin.visits.show', compact('attendance', 'user'));
     }
    
 }

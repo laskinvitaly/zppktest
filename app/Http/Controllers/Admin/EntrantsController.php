@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EntraintSubject;
 use Illuminate\Http\Request;
 use App\Models\Entrant;
 use App\Models\Spetsialnost;
+use App\Models\Subject;
 use App\Models\User;
 
 class EntrantsController extends Controller
@@ -19,9 +21,13 @@ class EntrantsController extends Controller
         return view('admin.entrants.create');
     }
 
-    public function edit(Entrant $entrant) {
+    public function edit(Entrant $entrant) { 
         $spets = Spetsialnost::all();
-        return view('admin.entrants.edit', compact('entrant','spets'));
+
+        $subj_ent = EntraintSubject::where('entrant_id', $entrant['user_id'])->get();
+        $subj = Subject::all();
+        
+        return view('admin.entrants.edit', compact('entrant', 'spets', 'subj_ent', 'subj'));
     }
 
     public function store(Request $request)
@@ -30,13 +36,33 @@ class EntrantsController extends Controller
     }
 
     public function update(Request $request, Entrant $entrant)
-    {   
+    {
+        $ocenca = $request->ocenkas;
+        $subj_ent = Subject::all();
+        $subj_num = [];
+        foreach ($subj_ent as $subj) {
+            array_push($subj_num, $subj['id']);
+        };
+        
+        $ocen_data = $request->validate([
+                'entrant_id' => 'nullable|string',
+                'subject_id' => 'nullable|string',
+                'ocenka' => 'nullable|string',
+        ]);
+
+        $i = 0;
+        foreach ($ocenca as $oc) {
+            $ocen_data['entrant_id'] = $entrant->user_id;
+            $ocen_data['subject_id'] = $subj_num[$i];
+            $ocen_data['ocenka'] = $oc;
+            EntraintSubject::updateOrCreate(['entrant_id' => $entrant->user_id, 'subject_id' => $subj_num[$i]], $ocen_data);
+            $i++;
+        }
 
         $entr = User::find($entrant['user_id']);
         if(!$entr) {
             return abort(404);
         }
-
 
         $data = $request->validate([
             'name' => 'required|string',
@@ -60,9 +86,8 @@ class EntrantsController extends Controller
             'medical_certificate' => 'nullable|file',
             'vaccination_certificate' => 'nullable|file',
             'phone' => 'nullable|string',
-
         ]);
-        // dd($data);
+
         try {
             $entr->update($data);
             $entrant->update($data);
@@ -82,5 +107,16 @@ class EntrantsController extends Controller
         $entrant->delete();
         $ent->delete();
         return redirect()->route('entrant.index');
+    }
+
+    public function ocenka(Request $request, Entrant $entrant)
+    {   
+        $subj_ent = EntraintSubject::where('entrant_id', $entrant['user_id'])->get();
+        $subj_ocenka = 0;
+        foreach ($subj_ent as $subj) {
+            $subj_ocenka += $subj['ocenka'];
+        };
+        
+        dd("Сумма оценок = " . $subj_ocenka);
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Entrant;
+use App\Models\Attendance;
 
 class User extends Authenticatable
 {
@@ -53,4 +54,5 @@ class User extends Authenticatable
     {
       return $this->hasMany(Entrant::class);
     }
+    
 }
