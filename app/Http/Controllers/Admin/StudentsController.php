@@ -89,9 +89,10 @@ class StudentsController extends Controller
     }    
     public function link(Request $request, $student)
     {   
-        $unique_url = URL::to('/admin/students') ."/". uniqid(md5(rand()), true);
+        $unique_url = uniqid(md5(rand()), true);
 
-        // $stud_qrcode = QrCode::size(300)->generate($unique_url);
+        $qr_url = URL::to('/admin') . '/' . $unique_url . '/visit';
+        $stud_qrcode = QrCode::size(300)->generate($qr_url);
         
         $t = User::find($student);
         if(!$t) {
