@@ -240,12 +240,59 @@
                 
                 <div class="tab-pane fade" id="custom-tabs-three" role="tabpanel" aria-labelledby="custom-tabs-three">
                   
-                  Добавлю поля
-                 
-                 </div>                     
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Предмет</th>
+                        <th scope="col">Оценка</th>
+                      </tr>
+                    </thead>  
+                    <tbody>
+                      @foreach ($subj as $sub)
+                      <tr>
+                        <th scope="row">{{ $sub->id }}</th>
+                        <td>
+                            {{ $sub->subject_name }}
+                        </td>
+                        <td>
+                          <div class="form-group mb-0">
+                            <input name="ocenkas[]" type="text" class="form-control" placeholder="Оценка" 
+                            value=
+                            @foreach ($subj_ent as $sub_ent)
+                              @if ($sub->id == $sub_ent->subject_id) 
+                              {{ "$sub_ent->ocenka" }} 
+                              @endif
+                            @endforeach>
+                          </div>
+                        </td>
+                      </tr>
+                      {{-- <tr>
+                        <th scope="row">{{ $sub->id }}</th>
+                        <td>
+                            {{ $sub->subject_name }}
+                        </td>
+                        <td>
+                          <div class="form-group mb-0">
+                            <input name="ocenka" type="text" class="form-control" placeholder="Оценка" 
+                            value=
+                            @foreach ($subj_ent as $sub_ent)
+                              @if ($sub->id == $sub_ent->subject_id) 
+                              {{ "$sub_ent->ocenka" }} 
+                              @endif
+                            @endforeach>
+                          </div>
+                        </td>
+                      </tr> --}}
+                      @endforeach
+                    </tbody>
+
+                  </table>
+                  <a class="btn btn-block btn-success" style="max-width:150px; margin: 0 auto;" href="<?php echo e(route('entrant.ocenka',$entrant['id'])); ?>">Генерировать</a>
+                 </div>
               </div>
             </div>
-            <div class="card-footer">                    
+            <div class="card-footer">
               <div>
                 <button type="submit"  class="btn btn-primary my-3">Изменить</button>
               </div>
