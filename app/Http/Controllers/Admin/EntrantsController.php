@@ -9,9 +9,16 @@ use App\Models\Entrant;
 use App\Models\Spetsialnost;
 use App\Models\Subject;
 use App\Models\User;
+use App\Services\Entrant\Service;
 
 class EntrantsController extends Controller
 {
+    public $service;
+
+    public function __construct(Service $service){
+        $this->service = $service;
+    }
+
     public function index() {
         $entrants = Entrant::all();
         return view('admin.entrants.index', compact('entrants'));
@@ -37,33 +44,17 @@ class EntrantsController extends Controller
 
     public function update(Request $request, Entrant $entrant)
     {
-        $ocenca = $request->ocenkas;
-        $subj_ent = Subject::all();
-        $subj_num = [];
-        foreach ($subj_ent as $subj) {
-            array_push($subj_num, $subj['id']);
-        };
+        $ocenkas = $request->ocenkas;
         
-        $ocen_data = $request->validate([
-                'entrant_id' => 'nullable|string',
-                'subject_id' => 'nullable|string',
-                'ocenka' => 'nullable|string',
+        $data = $request->validate([
+            'ocenkas' => 'array|required',
+            'ocenkas.*' => 'nullable|integer|between:3,5',            
         ]);
 
-        $i = 0;
-        foreach ($ocenca as $oc) {
-            $ocen_data['entrant_id'] = $entrant->user_id;
-            $ocen_data['subject_id'] = $subj_num[$i];
-            $ocen_data['ocenka'] = $oc;
-            EntraintSubject::updateOrCreate(['entrant_id' => $entrant->user_id, 'subject_id' => $subj_num[$i]], $ocen_data);
-            $i++;
-        }
 
-        $entr = User::find($entrant['user_id']);
-        if(!$entr) {
-            return abort(404);
-        }
+        $this->service->updateOcenka($data, $entrant);       
 
+       
         $data = $request->validate([
             'name' => 'required|string',
             'family' => 'required|string',
@@ -72,7 +63,7 @@ class EntrantsController extends Controller
             'passport_seria' => ['nullable', 'string', 'regex:/^\d{4}$/'],
             'passport_number' => ['nullable', 'string', 'regex:/^\d{6}$/'],
             'vkontakte' => 'required|string',
-            'spetsialnost' => 'nullable|integer',
+            'spetsialnost_id' => 'nullable|integer',
             'rating' => 'nullable|integer',
             'sirota' => 'nullable|integer',
             'outregion' => 'nullable|integer',
@@ -87,6 +78,20 @@ class EntrantsController extends Controller
             'vaccination_certificate' => 'nullable|file',
             'phone' => 'nullable|string',
         ]);
+
+        $data['rating'] = $this->service->getRating($entrant);
+
+        if ($data['sirota']==1){
+            $data['rating'] += 2;
+        }
+        if ($data['outregion']==1){
+            $data['rating'] += 1;
+        }
+
+        $entr = User::find($entrant['user_id']);
+        if(!$entr) {
+            return abort(404);
+        }
 
         try {
             $entr->update($data);
@@ -109,14 +114,5 @@ class EntrantsController extends Controller
         return redirect()->route('entrant.index');
     }
 
-    public function ocenka(Request $request, Entrant $entrant)
-    {   
-        $subj_ent = EntraintSubject::where('entrant_id', $entrant['user_id'])->get();
-        $subj_ocenka = 0;
-        foreach ($subj_ent as $subj) {
-            $subj_ocenka += $subj['ocenka'];
-        };
-        
-        dd("Сумма оценок = " . $subj_ocenka);
-    }
+    
 }

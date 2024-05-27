@@ -35,25 +35,27 @@
                 </div>
               </div>
               <!-- /.card-header -->
+              
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
                       <th style="width: 20px;">Id</th>
-                      <th class="text-left">Фамилия</th>
-                      <th class="text-left">Имя</th>
-                      <th class="text-left">Отчество</th>
+                      <th class="text-left">ФИО</th>
+                      <th class="text-left">Специальность</th>
+                      <th class="text-left">Рейтинг</th>
                       <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
+                    
                     @foreach ($entrants as $entrant)
                     <tr>
                       <td>{{ $loop->index+1 }}</td>
-                      <td>{{ $entrant->user->family }}</td>
-                      <td>{{ $entrant->user->name }}</td>
-                      <td>{{ $entrant->user->patronymic }}</td> 
+                      <td>{{ $entrant->user->family }} {{ $entrant->user->name }} {{ $entrant->user->patronymic }}</td>
+                      <td>{{ $entrant->spetsialnost?->name }}</td>
+                      <td>{{  $entrant->rating }}</td> 
                       <td><a class="btn btn-block btn-success" href="{{ route('entrant.edit',$entrant->id)}}"><i class="fas fa-pen"></i></a></td>
                       <td>
                         <form action="{{route('entrant.destroy', $entrant->id)}}" method="POST">

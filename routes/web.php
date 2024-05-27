@@ -58,8 +58,7 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             Route::post('/', [EntrantsController::class, 'store'])->name('entrant.store');
             Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrant.show');
             Route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
-            Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
-            Route::get('/{entrant}/ocenka', [EntrantsController::class, 'ocenka'])->name('entrant.ocenka');
+            Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');           
             Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
         });
         Route::group(['prefix' => 'teathers'], function(){

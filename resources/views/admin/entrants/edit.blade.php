@@ -74,23 +74,17 @@
                     <input name="patronymic" type="text" class="form-control" placeholder="Введите отчество" value="{{ $entrant->user->patronymic }}">
                   </div>
                   <div class="form-group">
-                    <label for="spetsialnost">Специальность</label>
-                    <select name="spetsialnost" class="custom-select">
+                    <label for="spetsialnost_id">Специальность</label>
+                    <select name="spetsialnost_id" class="custom-select">
                       
-                      @foreach ($spets as $sp)
-                      <option value="{{ $sp->id }}"@if($entrant->spetsialnost==$sp->id) selected @endif>{{ $sp->spets_name }}</option>
+                      @foreach ($spets as $item)
+                      <option value="{{ $item->id }}"@if($entrant->spetsialnost_id==$item->id) selected @endif>{{ $item->name }}</option>
                       @endforeach
-                      @if ($entrant->spetsialnost === null)
+                      @if ($entrant->spetsialnost_id === null)
                         <option disabled selected hidden>Выберите специальность</option>
                       @endif
                     </select>
                   </div> 
-                  
-                  <div class="form-group">
-                    <label for="rating">Рейтинг</label>
-                    <input name="rating" type="text" class="form-control" placeholder="Введите рейтинг" value="{{ $entrant->rating }}">
-                  </div> 
-
                   <div class="form-check">
                     <input name="sirota" type="checkbox" class="form-check-input" value="0" checked="true" style="display:none">
                     <input name="sirota" type="checkbox" class="form-check-input" value="1" {{ ($entrant->sirota === 1) ? 'checked' : '' }}>
@@ -257,7 +251,7 @@
                         </td>
                         <td>
                           <div class="form-group mb-0">
-                            <input name="ocenkas[]" type="text" class="form-control" placeholder="Оценка" 
+                            <input name="ocenkas[{{ $sub->id }}]" type="text" class="form-control" placeholder="Оценка" 
                             value=
                             @foreach ($subj_ent as $sub_ent)
                               @if ($sub->id == $sub_ent->subject_id) 
@@ -288,7 +282,7 @@
                     </tbody>
 
                   </table>
-                  <a class="btn btn-block btn-success" style="max-width:150px; margin: 0 auto;" href="<?php echo e(route('entrant.ocenka',$entrant['id'])); ?>">Генерировать</a>
+                  
                  </div>
               </div>
             </div>

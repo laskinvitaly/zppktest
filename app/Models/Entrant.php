@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Spetsialnost;
 
 class Entrant extends Model
 {
@@ -15,7 +16,7 @@ class Entrant extends Model
     protected $fillable = [
         'user_id',
         'vkontakte',
-        'spetsialnost',
+        'spetsialnost_id',
         'rating',
         'sirota',
         'outregion',
@@ -37,5 +38,9 @@ class Entrant extends Model
     public function user()
     {
       return $this->belongsTo(User::class);
+    }
+    public function spetsialnost()
+    {
+      return $this->belongsTo(Spetsialnost::class);
     }
 }

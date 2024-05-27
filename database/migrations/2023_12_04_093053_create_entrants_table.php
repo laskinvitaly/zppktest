@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('vkontakte')->nullable();
-            $table->integer('spetsialnost')->nullable();
-            $table->integer('rating')->default(0);
+            $table->foreignId('spetsialnost_id')->nullable()->constrained()->onDelete('cascade');
+            $table->float('rating')->default(0);
             $table->integer('sirota')->boolean()->default(0);
             $table->integer('outregion')->boolean()->default(0);
             $table->string('passport')->nullable();
