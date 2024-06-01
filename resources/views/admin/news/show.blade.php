@@ -31,8 +31,8 @@
                 <h3 class="card-title">Просмотр новости</h3>
 
                 <div class="card-tools d-flex">
-                  <a class="btn btn-primary mr-2" href="{{ route('new.edit', 1)}}">Редактировать</a>
-                  <form action="{{route('new.destroy', 1)}}" method="POST">
+                  <a class="btn btn-primary mr-2" href="{{ route('new.edit', $news->id)}}">Редактировать</a>
+                  <form action="{{route('new.destroy', $news->id)}}" method="POST">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-block btn-danger">Удалить</button>
@@ -47,31 +47,47 @@
                       <p><strong>Id</strong></p>
                     </div>
                     <div class="col-10">
-                      <p>125</p>
+                      <p>{{ $news->id }}</p>
+                    </div>
+                    <div class="col-2">
+                      <p><strong>Дата</strong></p>
+                    </div>
+                    <div class="col-10">
+                      <p>{{ $news->date }}</p>
                     </div>
                     <div class="col-2">
                       <p><strong>Название</strong></p>
                     </div>
                     <div class="col-10">
-                      <p>Соревнования по мини футболу</p>
+                      <p>{{ $news->title }}</p>
                     </div>
                     <div class="col-2">
                       <p><strong>Категория</strong></p>
                     </div>
                     <div class="col-10">
-                      <p>Спортивные мероприятия</p>
+                      <p>@if($news->keyword !== null)
+                         {{ $categori->categori }}
+                         @else
+                         Отсутствует
+                         @endif</p>
+                    </div>
+                    <div class="col-2">
+                      <p><strong>Краткое описание</strong></p>
+                    </div>
+                    <div class="col-10">
+                      <p>{{ $news->readmore }}</p>
                     </div>
                     <div class="col-2">
                       <p><strong>Контент</strong></p>
                     </div>
                     <div class="col-10">
-                      <p>Сегодня 15.05. прошли соревнования ......</p>
+                      <p>{{ $news->content }}</p>
                     </div>
                     <div class="col-2">
                       <p><strong>Главное изображение</strong></p>
                     </div>
                     <div class="col-10">
-                      <div class="news-photo" style="color: #fff; background: #333; width: 100px; height: 150px; border-radius: 7px; display: flex; justify-content: center; align-items: center;">Фото</div>
+                      <img class="img-fluid" src="{{ $url = Storage::url($news['image']); }}" alt="">
                     </div>
                     <div class="col-12">
                       <a href="{{ route('new.index') }}">Список новостей</a>

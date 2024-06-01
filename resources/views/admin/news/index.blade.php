@@ -39,26 +39,29 @@
                   <thead>
                     <tr>
                       <th style="width: 20px;">Id</th>
-                      <th class="text-left">Название</th>                      
+                      <th class="text-left">Название</th>
                       <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($news as $new)
                     <tr>
-                      <td>183</td>
-                      <td>Линейка 2023 г.</td>
-                      <td><a class="btn btn-block btn-success" href="{{ route('new.show',1)}}"><i class="far fa-eye"></i></a></td>
-                      <td><a class="btn btn-block btn-success" href="{{ route('new.edit',1)}}"><i class="fas fa-pen"></i></a></td>
+                      <td>{{ $new->id }}</td>
+                      <td>{{ $new->title }}</td>
+                      <td><a class="btn btn-block btn-success" href="{{ route('new.show',$new->id)}}"><i class="far fa-eye"></i></a></td>
+                      <td><a class="btn btn-block btn-success" href="{{ route('new.edit',$new->id)}}"><i class="fas fa-pen"></i></a></td>
                       <td>
-                        <form action="{{route('new.destroy', 1)}}" method="POST">
+                        <form action="{{route('new.destroy', $new->id)}}" method="POST">
                           @csrf
                           @method('delete')
                           <button type="submit" class="btn btn-block btn-danger"><i class="fas fa-trash-alt"></i></button>
                         </form>
                       </td>                      
                     </tr> 
+                    @endforeach
+
                   </tbody>
                 </table>
               </div>

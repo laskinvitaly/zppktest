@@ -32,6 +32,7 @@ Route::group(['prefix' => 'certification'], function(){
 });
 Route::group(['prefix' => 'news'], function(){
     Route::get('/', [App\Http\Controllers\Front\NewsController::class, 'index'])->name('front.news.index');
+    Route::get('/{new}', [App\Http\Controllers\Front\NewsController::class, 'show'])->name('front.news.new');
 });
 Route::group(['prefix' => 'entrant'], function(){
     Route::get('/{user}/edit', [App\Http\Controllers\Front\EntrantsController::class, 'edit'])->middleware('auth', 'Entrant')->name('front.entrant.edit');
@@ -79,8 +80,11 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
         Route::group(['prefix' => 'categories'], function(){
             Route::get('/', [CategoriesController::class, 'index'])->name('category.index');
             Route::get('/create', [CategoriesController::class, 'create'])->name('category.create');
+            route::post('/', [CategoriesController::class, 'store'])->name('category.store'); 
             Route::get('/{category}', [CategoriesController::class, 'show'])->name('category.show');
             Route::get('/{category}/edit', [CategoriesController::class, 'edit'])->name('category.edit');
+            route::patch('/{category}', [CategoriesController::class, 'update'])->name('category.update');
+            route::delete('/{category}', [CategoriesController::class, 'destroy'])->name('category.destroy');
         });
         Route::group(['prefix' => 'news'], function(){
             route::get('/',  [NewsController::class, 'index'])->name('new.index');

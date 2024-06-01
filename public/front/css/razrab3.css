@@ -1,4 +1,41 @@
 /* Стили которые будет писать Рожков */
-.testrj{
-    color: green;
+.header a {
+    color: #333333;
+}
+body {
+    line-height: 1;
+}
+.news {
+    line-height: 1.5;
+}
+.news a {
+    color: #CB7069;
+}
+.news img {
+    max-height: 200px;
+    height: 100%;
+    object-fit: cover;
+}
+.news__pagination nav{
+    display: block;
+}
+.news__pagination .pagination a, .pagination span {
+    font-size: 20px;
+    color: #CB7069;
+}
+.news__pagination .pagination .active span {
+    background-color: #CB7069;
+    border: 1px solid #93524d;
+}
+.new_view img{
+
+    object-fit: contain;
+    max-height: 450px;
+    height: 100%;
+}
+.new__content {
+    margin-top: 40px;
+    font-size: 17px;
+    white-space: pre-line;
+    line-height: 1.3;
 }
