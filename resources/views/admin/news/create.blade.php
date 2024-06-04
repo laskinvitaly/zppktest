@@ -32,33 +32,34 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                  <form class="p-3" action="{{ route('new.store') }}" method="POST">
+                  <form class="p-3" action="{{ route('new.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                       <div class="form-group">
-                        <label for="">Название</label>
-                        <input type="text" class="form-control" placeholder="Введите название">
+                        <label for="title">Название</label>
+                        <input name="title" type="text" class="form-control" placeholder="Введите название">
                       </div>
                       <div class="form-group">
-                        <label for="">Категория</label>
-                        <select class="custom-select rounded-0" id="">
-                          <option>Конкурсы/олимпиады</option>
-                          <option>Спортивные мероприятия</option>
-                          <option>Другие новости</option>
+                        <label for="keyword">Категория</label>
+                        <select name="keyword" class="custom-select rounded-0" id="">
+                          @foreach ($categories as $categori)
+                            <option value="{{ $categori->id }}">{{ $categori->categori }}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="">Контент</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <label for="readmore">Краткое описание</label>
+                        <input name="readmore" type="text" class="form-control" placeholder="Введите краткое описание">
+                      </div>
+                      <div class="form-group">
+                        <label for="content">Контент</label>
+                        <textarea name="content" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                       </div>
                       <div class="form-group">
                         <label for="">Главное изображение</label>
                         <div class="input-group">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                          </div>
-                          <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
+                            <input name="image" type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="image">Choose file</label>
                           </div>
                         </div>
                       </div>

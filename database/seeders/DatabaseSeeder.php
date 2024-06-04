@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             SpetsialnostSeeder::class,
             SubjectSeeder::class,
             EntraintSubjectSeeder::class,
+            NewSeeder::class,
+            CategoriSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('readmore')->nullable();
             $table->text('content')->nullable();
             $table->string('description')->nullable();
+            $table->string('date')->nullable();
             $table->string('keyword')->nullable();
             $table->timestamps();
         });

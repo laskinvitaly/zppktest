@@ -1,5 +1,6 @@
 <!-- Content Wrapper. Contains page content -->
 @extends('layouts.main')
+@section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -10,8 +11,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right"> 
-              <li class="breadcrumb-item"><a href="">Главная</a></li>
-              <li class="breadcrumb-item"><a href="">Группы</a></li>             
+              <li class="breadcrumb-item"><a href="{{ route('main')}}">Главная</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('category.index')}}">Категории</a></li>
               <li class="breadcrumb-item active">Создание</li>
             </ol>
           </div><!-- /.col -->
@@ -31,7 +32,14 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                  
+                <form class="p-3" action="{{ route('category.store') }}" method="POST">
+                  @csrf
+                    <div class="form-group">
+                      <label for="categori">Название категории</label>
+                      <input name="categori" type="text" class="form-control" placeholder="Введите название">
+                    </div>                    
+                    <button type="submit" class="btn btn-primary">Добавить</button>                    
+                </form>
               </div>
               <!-- /.card-body -->
             </div>
@@ -45,3 +53,4 @@
   </div>
   <!-- /.content-wrapper -->
 
+@endsection

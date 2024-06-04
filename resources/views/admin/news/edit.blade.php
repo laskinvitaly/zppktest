@@ -32,35 +32,36 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                  <form class="p-3" action="{{ route('new.update',1) }}" method="POST">
+                  <form class="p-3" action="{{ route('new.update', $news->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                       <div class="form-group">
-                        <label for="">Название</label>
-                        <input type="text" class="form-control" placeholder="Введите название" value="Соревнования по мини футболу">
+                        <label for="title">Название</label>
+                        <input name="title" type="text" class="form-control" placeholder="Введите название" value="{{ $news->title }}">
                       </div>
                       <div class="form-group">
-                        <label for="">Категория</label>
-                        <select class="custom-select rounded-0" id="">
-                          <option>Конкурсы/олимпиады</option>
-                          <option selected>Спортивные мероприятия</option>
-                          <option>Другие новости</option>
+                        <label for="keyword">Категория</label>
+                        <select name="keyword" class="custom-select rounded-0" id="">
+                          @foreach ($categories as $categori)
+                            <option value="{{ $categori->id }}" @if($news->keyword==$categori->id) selected @endif>{{ $categori->categori }}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="">Контент</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ...">Сегодня 15.05. прошли соревнования ......
+                        <label for="readmore">Краткое описание</label>
+                        <input name="readmore" type="text" class="form-control" placeholder="Введите краткое описание" value="{{ $news->readmore }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="content">Контент</label>
+                        <textarea name="content" class="form-control" rows="3" placeholder="Enter ...">{{ $news->content }}
                         </textarea>
                       </div>
                       <div class="form-group">
                         <label for="">Главное изображение</label>
                         <div class="input-group">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                          </div>
-                          <div class="input-group-append">
-                            <span class="input-group-text">Upload</span>
+                            <input name="image" type="file" class="custom-file-input" id="exampleInputFile">
+                            <label class="custom-file-label" for="image">Choose file</label>
                           </div>
                         </div>
                       </div>

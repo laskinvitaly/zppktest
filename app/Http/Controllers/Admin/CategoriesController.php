@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -12,7 +13,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-       return view('admin.categories.index');
+        $categories = Categories::all();
+        return view('admin.categories.index', compact('categories'));
         //
     }
 
@@ -30,7 +32,15 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'categori' => 'required|string',
+        ]);
+        try {
+            Categories::CreateOrFirst($data);
+        } catch (\Exception $exception) {            
+            return $exception->getMessage();
+        }
+        return redirect()->route('category.index');
     }
 
     /**
@@ -47,8 +57,8 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
-        return view('admin.categories.edit');
+        $category = Categories::where('id', $id)->first();
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -56,14 +66,24 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'categori' => 'required|string',
+        ]);
+        Categories::where('id', $id)->update($data);
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(string $id)
+    public function destroy(string $id)
     {
-        //
+        $category = Categories::find($id);
+        if(!$category) {
+            return abort(404);
+        }
+        $category->delete();
+        return redirect()->route('category.index');
     }
 }
