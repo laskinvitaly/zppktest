@@ -1,0 +1,56 @@
+/*
+Семячкин Александр стили
+*/
+.entrant-title {
+    margin-bottom: 5%;
+}
+.entarnt-table {
+    display: flex;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.entarnt-table tr{
+    display: flex;
+    flex-direction: column;
+}
+.entarnt-table th, td {
+    font-size: 17px;
+    margin-bottom: 20px;
+    margin-right: 30px;
+}
+
+.entrants {
+    display: flex;
+    flex-direction: column;
+}
+.entrants .form-entrant {
+    display: flex;
+    flex-direction: column;
+}
+.entrants .form-entrant>label {
+    padding: 15px 0 5px 0;
+    font-weight: bold;
+}
+.entrants .form-input, .custom-file{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #999;
+}
+.custom-file {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+.entrants .btn-entrant {
+    font-size: 18px;
+    width: 160px;
+    cursor: pointer;
+    margin: 30px auto 0 auto;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #CB7069;
+    border: 1px solid #999;
+}
+

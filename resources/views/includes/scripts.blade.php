@@ -30,5 +30,7 @@
 <script src="{{asset('adminlte/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
+<script type="text/javascript" src="{{asset('front/js/imask.js')}}"></script>
+<script type="text/javascript" src="{{asset('adminlte/dist/js/script.js')}}"></script>
 </body>
 </html>

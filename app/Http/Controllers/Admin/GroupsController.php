@@ -28,7 +28,8 @@ class GroupsController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {  
+        dd("Группа создана");
         //
     }
 
@@ -53,14 +54,14 @@ class GroupsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd("Группа изменена");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(string $id)
+    public function destroy(string $id)
     {
-        //
+        dd("Группа удалена");
     }
 }

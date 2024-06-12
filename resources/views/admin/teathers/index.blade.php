@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('content')
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,6 +35,35 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th style="width: 20px;">Id</th>
+                      <th class="text-left">Название</th>                      
+                      <th style="width: 20px;">&nbsp;</th>
+                      <th style="width: 20px;">&nbsp;</th>
+                      <th style="width: 20px;">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($allTeachers as $t)
+                    <tr>
+                      <td>{{ $t['id'] }}</td>
+                      <td>{{ $t['family'] }} {{ $t['name'] }} {{ $t['patronymic'] }}</td>
+                      <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.show',$t['id'])); ?>"><i class="far fa-eye"></i></a></td>
+                      <td><a class="btn btn-block btn-success" href="<?php echo e(route('teather.edit',$t['id'])); ?>"><i class="fas fa-pen"></i></a></td>
+                      <td>
+                        <form action="<?php echo e(route('teather.destroy', $t['id'])); ?>" method="POST">
+                          <?php echo csrf_field(); ?>
+                          <?php echo method_field('delete'); ?>
+                          <button type="submit" class="btn btn-block btn-danger"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                      </td>                      
+                    </tr> 
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
                 
               </div>
               <!-- /.card-body -->
@@ -47,3 +77,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  @endsection
