@@ -75,7 +75,10 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::get('/', [LessonsController::class,'index'])->name('lesson.index');
             route::get('/create', [LessonsController::class,'create'])->name('lesson.create');
             route::get('/{lesson}/edit', [LessonsController::class,'edit'])->name('lesson.edit');       
-            route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show');    
+            route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show');
+            route::post('/', [LessonsController::class, 'store'])->name('lesson.store');
+            route::patch('/{group}', [LessonsController::class, 'update'])->name('lesson.update');
+            route::delete('/{group}', [LessonsController::class, 'destroy'])->name('lesson.destroy');   
         });
         Route::group(['prefix' => 'categories'], function(){
             Route::get('/', [CategoriesController::class, 'index'])->name('category.index');
@@ -119,6 +122,18 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             Route::post('/{entrant}/approve', [RegisterController::class, 'approve'])->name('register.approve');
             Route::post('/{entrant}/deleterequest', [RegisterController::class, 'deleterequest'])->name('register.deleterequest');        
         });
+    });
+    Route::group(['prefix' => 'roles'], function(){
+        route::get('/',  [RolesController::class, 'index'])->name('role.index');
+        route::get('/create', [RolesController::class, 'create'])->name('role.create');
+        route::post('/', [RolesController::class, 'store'])->name('role.store');
+        route::get('/{slug}', [RolesController::class, 'show'])->name('role.show');
+        route::get('/{slug}/edit', [RolesController::class, 'edit'])->name('role.edit');
+        route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
+        route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
+    });
+    Route::group(['prefix' => 'register'], function(){
+        route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
     });
 });
 
