@@ -521,8 +521,8 @@ class UserTableSeeder extends Seeder
                 ],
                 [
                     'family' => 'Володин',
-                    'name' => 'Анатолий',
-                    'patronymic' => 'Б',
+                    'name' => 'Александр',
+                    'patronymic' => 'Борисович',
                     'email' => 'volodin@gmail.com',
                     'login' => 'volodin',
                     'password' => Hash::make('volodin'),
@@ -643,15 +643,6 @@ class UserTableSeeder extends Seeder
                     'email' => 'pleshakova@gmail.com',
                     'login' => 'pleshakova',
                     'password' => Hash::make('pleshakova'),
-                    'role_id' => '3',
-                ],
-                [
-                    'family' => 'Кудашкин',
-                    'name' => 'Евгений',
-                    'patronymic' => 'Б',
-                    'email' => 'kydashkin@gmail.com',
-                    'login' => 'kydashkin',
-                    'password' => Hash::make('kydashkin'),
                     'role_id' => '3',
                 ],
                 [
