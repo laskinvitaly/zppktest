@@ -80,4 +80,65 @@ class CertificationController extends Controller
         return redirect()->route('front.certification.create');
     }
   }
+
+  public function update(string $userid) {
+    
+    $user = auth()->user();
+    if($user->role_id !== 3) {
+      return redirect()->route('frontpage');
+    }
+
+    $certification = Teacher::where('user_id', $user->id)->first();
+    $user = User::where('id', $user->id)->first();
+    $portfolio = Image::where('teather_id', $certification->id)->get();
+
+    return view('front.certification.update', compact('user', 'certification', 'portfolio'));
+  }
+
+  public function stor(string $id, Request $request) {
+    $user = auth()->user();
+      if($user->role_id !== 3) {
+        return redirect()->route('frontpage');
+      }
+      $certification = Teacher::where('user_id', $user->id)->first();
+      
+      $data = $request->validate([
+        'experience' => 'required|string',
+        'specialization' => 'required|string',
+        'content' => 'required|string'
+      ]);
+      
+      $images = $request->file('images');
+      $data['user_id'] = $user->id;
+
+      if($request->hasFile('photo')){
+        $photo = $request->file('photo');
+        $newPhotoName = Str::random(10) . '.' . $photo->getClientOriginalExtension();
+        $data['photo_url'] = $photo->storeAs('uploads', $newPhotoName, 'public');
+      }
+      
+      
+      
+      try {
+        $certification->update($data);
+        foreach ($images as $image) {
+            $newName = Str::random(10) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('uploads', $newName, 'public');
+            Image::updateOrInsert([
+                'teather_id' => $certification->id,
+                'path' => $path
+            ]);
+        }
+        return redirect()->route('front.certification.index');
+    } catch(\Exception $e) {
+        return redirect()->route('front.certification.create');
+    }
+  }
+  public function show(string $id) {
+    $certification = Teacher::where('id', $id)->first();
+    $user = User::where('id', $certification->user_id)->first();
+    $portfolio = Image::where('teather_id', $certification->id)->get();
+
+    return view('front.certification.show', compact('certification', 'user', 'portfolio'));
+  }
 }

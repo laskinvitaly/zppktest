@@ -38,7 +38,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="card" style="max-width: 100%;">
+            <div class="card" style="max-width: 100%; width: 100%;">
               <div class="card-header">
                 <h3 class="card-title">Разместите информацию о вашей деятельности</h3>                
               </div>

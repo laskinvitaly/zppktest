@@ -4,26 +4,105 @@
 }
 
 .cards__list {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 35px 0;
+}
+@media(max-width: 1024px) {
+    .cards__list {
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 1fr 1fr; 
+    }
+}
+@media(max-width: 768px) {
+    .cards__list {
+        grid-template-columns: 1fr; 
+        grid-template-rows: 1fr; 
+    }
+}
+
+.certification__item {
+    margin: 0 auto;
 }
 
 .card {
-    width: 18rem; 
+    height: 100%;
+    width: 20rem; 
     display: flex; 
     flex-direction: column; 
-    text-align: center; 
+    text-align: center;
+    justify-content: space-between;
     padding-left: 0; 
     padding-right: 0;
 }
+.card .btn {
+    background-color: #CB7069;
+}
+.card .btn.update {
+    background-color: #e03428;
+}
+
+.card img {
+    border-radius: 5px;
+    height: 350px;
+    object-fit: cover;
+    object-position: center;
+}
 
 .card-title {
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .card-text {
+    font-size: 16px !important;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #929292;
     padding-bottom: 20px;
+}
+
+.guideline {
+    background-color: rgba(231, 231, 231, .7);
+    border-radius: 10px;
+    padding: 15px;
+}
+.guideline .guideline__image {
+    max-width: 400px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.guideline .guideline__image img{
+    width: 100%;
+}
+.guideline .guideline__text {
+    margin-top: 10px;
+    font-size: 18px;
+    white-space: pre-line;
+}
+.guideline .guideline__uv {
+    font-size: 19px;
+    font-weight: bold;
+    display: flex;
+    align-items: end;
+    font-style: italic;
+}
+.guideline .guideline__subtitle {
+    white-space: pre-line ;
+    font-size: 22px;
+    color: #273350;
+    margin-bottom: 10px;
+}
+.guideline .guideline__der {
+    white-space: pre-line;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #929292;
+    font-size: 15px;
+}
+
+@media(max-width:1200px) {
+    .guideline .guideline__image {
+        max-height: none;
+    }
 }
