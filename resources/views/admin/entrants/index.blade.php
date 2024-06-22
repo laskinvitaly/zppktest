@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
   <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -34,37 +35,37 @@
                 </div>
               </div>
               <!-- /.card-header -->
+              
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
                       <th style="width: 20px;">Id</th>
-                      <th class="text-left">Фамилия</th>
-                      <th class="text-left">Имя</th>
-                      <th class="text-left">Отчество</th>
-                      <th class="text-left">Группа</th>
-                      <th style="width: 20px;">&nbsp;</th>
+                      <th class="text-left">ФИО</th>
+                      <th class="text-left">Специальность</th>
+                      <th class="text-left">Рейтинг</th>
                       <th style="width: 20px;">&nbsp;</th>
                       <th style="width: 20px;">&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
+                    
+                    @foreach ($entrants as $entrant)
                     <tr>
-                      <td>69</td>
-                      <td>Иванов</td>
-                      <td>Иван</td>
-                      <td>Иванович</td>
-                      <td>451</td>
-                      <td><a class="btn btn-block btn-success" href="{{ route('entrant.show',1)}}"><i class="far fa-eye"></i></a></td>
-                      <td><a class="btn btn-block btn-success" href="{{ route('entrant.edit',1)}}"><i class="fas fa-pen"></i></a></td>
+                      <td>{{ $loop->index+1 }}</td>
+                      <td>{{ $entrant->user->family }} {{ $entrant->user->name }} {{ $entrant->user->patronymic }}</td>
+                      <td>{{ $entrant->spetsialnost?->name }}</td>
+                      <td>{{  $entrant->rating }}</td> 
+                      <td><a class="btn btn-block btn-success" href="{{ route('entrant.edit',$entrant->id)}}"><i class="fas fa-pen"></i></a></td>
                       <td>
-                        <form action="{{route('entrant.destroy', 1)}}" method="POST">
+                        <form action="{{route('entrant.destroy', $entrant->id)}}" method="POST">
                           @csrf
                           @method('delete')
                           <button type="submit" class="btn btn-block btn-danger"><i class="fas fa-trash-alt"></i></button>
                         </form>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

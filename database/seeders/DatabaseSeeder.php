@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
             EntrantTableSeeder::class,
             RequestRegisterTableSeeder::class,
             TeatherTableSeeder::class,
+            SpetsialnostSeeder::class,
+            SubjectSeeder::class,
+            EntraintSubjectSeeder::class,
+            NewSeeder::class,
+            CategoriSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

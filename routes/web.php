@@ -12,7 +12,6 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Front\CertificationController;
-use App\Http\Controllers\Front\CertupdatedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,15 +35,18 @@ Route::group(['prefix' => 'certification'], function(){
 });
 Route::group(['prefix' => 'news'], function(){
     Route::get('/', [App\Http\Controllers\Front\NewsController::class, 'index'])->name('front.news.index');
+    Route::get('/{new}', [App\Http\Controllers\Front\NewsController::class, 'show'])->name('front.news.new');
 });
 Route::group(['prefix' => 'entrant'], function(){
     Route::get('/{user}/edit', [App\Http\Controllers\Front\EntrantsController::class, 'edit'])->middleware('auth', 'Entrant')->name('front.entrant.edit');
-  //  Route::get('/{entrants}', [App\Http\Controllers\Front\EntrantsController::class, 'update'])->middleware('auth', 'Entrant')->name('front.entrant.update');
+    Route::patch('/{user}/update', [App\Http\Controllers\Front\EntrantsController::class, 'update'])->middleware('auth', 'Entrant')->name('front.entrant.update');
 });
 
 Route::middleware(['auth', 'Adminpanel'])->group(function(){
     Route::group(['prefix' => 'admin'], function(){
         Route::get('/', [AdminController::class, 'index'])->name('main');
+        Route::get('/{student}/visit', [VisitController::class, 'index']);
+        Route::get('/visit', [VisitController::class, 'show'])->name('show.visit');;
         Route::group(['prefix' => 'groups'], function(){
             Route::get('/', [GroupsController::class, 'index'])->name('group.index');
             Route::get('/create', [GroupsController::class, 'create'])->name('group.create');
@@ -60,9 +62,9 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             Route::post('/', [EntrantsController::class, 'store'])->name('entrant.store');
             Route::get('/{entrant}', [EntrantsController::class, 'show'])->name('entrant.show');
             Route::patch('/{entrant}', [EntrantsController::class, 'update'])->name('entrant.update');
-            Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');
+            Route::get('/{entrant}/edit', [EntrantsController::class, 'edit'])->name('entrant.edit');           
             Route::delete('/{entrant}', [EntrantsController::class, 'destroy'])->name('entrant.destroy');
-        }); 
+        });
         Route::group(['prefix' => 'teathers'], function(){
             Route::get('/', [TeathersController::class, 'index'])->name('teather.index');
             Route::get('/create', [TeathersController::class, 'create'])->name('teather.create');
@@ -76,13 +78,19 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::get('/', [LessonsController::class,'index'])->name('lesson.index');
             route::get('/create', [LessonsController::class,'create'])->name('lesson.create');
             route::get('/{lesson}/edit', [LessonsController::class,'edit'])->name('lesson.edit');       
-            route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show');    
+            route::get('/{lesson}',[LessonsController::class,'show'])->name('lesson.show');
+            route::post('/', [LessonsController::class, 'store'])->name('lesson.store');
+            route::patch('/{group}', [LessonsController::class, 'update'])->name('lesson.update');
+            route::delete('/{group}', [LessonsController::class, 'destroy'])->name('lesson.destroy');   
         });
         Route::group(['prefix' => 'categories'], function(){
             Route::get('/', [CategoriesController::class, 'index'])->name('category.index');
             Route::get('/create', [CategoriesController::class, 'create'])->name('category.create');
+            route::post('/', [CategoriesController::class, 'store'])->name('category.store'); 
             Route::get('/{category}', [CategoriesController::class, 'show'])->name('category.show');
             Route::get('/{category}/edit', [CategoriesController::class, 'edit'])->name('category.edit');
+            route::patch('/{category}', [CategoriesController::class, 'update'])->name('category.update');
+            route::delete('/{category}', [CategoriesController::class, 'destroy'])->name('category.destroy');
         });
         Route::group(['prefix' => 'news'], function(){
             route::get('/',  [NewsController::class, 'index'])->name('new.index');
@@ -102,11 +110,33 @@ Route::middleware(['auth', 'Adminpanel'])->group(function(){
             route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
             route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
         });
+        Route::group(['prefix' => 'students'], function(){
+            Route::get('/', [StudentsController::class, 'index'])->name('student.index');
+            Route::get('/create', [StudentsController::class, 'create'])->name('student.create');
+            Route::get('/{student}', [StudentsController::class, 'show'])->name('student.show');
+            Route::get('/{student}/edit', [StudentsController::class, 'edit'])->name('student.edit'); 
+            Route::get('/{student}/link', [StudentsController::class, 'link'])->name('student.link'); 
+            route::post('/', [StudentsController::class, 'store'])->name('student.store'); 
+            route::patch('/{student}', [StudentsController::class, 'update'])->name('student.update');
+            route::delete('/{student}', [StudentsController::class, 'destroy'])->name('student.destroy');
+        });
         Route::group(['prefix' => 'register'], function(){
             route::get('/',  [RegisterController::class, 'index'])->name('register.index');
             Route::post('/{entrant}/approve', [RegisterController::class, 'approve'])->name('register.approve');
             Route::post('/{entrant}/deleterequest', [RegisterController::class, 'deleterequest'])->name('register.deleterequest');        
         });
+    });
+    Route::group(['prefix' => 'roles'], function(){
+        route::get('/',  [RolesController::class, 'index'])->name('role.index');
+        route::get('/create', [RolesController::class, 'create'])->name('role.create');
+        route::post('/', [RolesController::class, 'store'])->name('role.store');
+        route::get('/{slug}', [RolesController::class, 'show'])->name('role.show');
+        route::get('/{slug}/edit', [RolesController::class, 'edit'])->name('role.edit');
+        route::patch('/{slug}', [RolesController::class, 'update'])->name('role.update');
+        route::delete('/{slug}', [RolesController::class, 'destroy'])->name('role.destroy');
+    });
+    Route::group(['prefix' => 'register'], function(){
+        route::get('/',  [RegisterController::class, 'index'])->name('register.index');        
     });
 });
 

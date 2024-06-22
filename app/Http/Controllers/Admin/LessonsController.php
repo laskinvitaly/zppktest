@@ -20,5 +20,14 @@ class lessonsController extends Controller
    public function edit(){
     return view('admin.lessons.edit');
    }
+
+public function update(Request $request, string $id)
+{
+    dd("Кружок или секция изменена");
 }
 
+public function destroy(string $id)
+{
+    dd("Кружок или секция удалена");
+}
+}

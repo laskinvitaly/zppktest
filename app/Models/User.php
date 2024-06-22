@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Entrant;
+use App\Models\Attendance;
 
 class User extends Authenticatable
 {
@@ -25,6 +27,7 @@ class User extends Authenticatable
         'password',
         'login',
         'role_id',
+        'link',
     ];
 
     /**
@@ -46,4 +49,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function entrants()
+    {
+      return $this->hasMany(Entrant::class);
+    }
+    
 }
