@@ -12,7 +12,9 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Front\CertificationController;
-
+use App\Http\Controllers\Front\CertupdatedController;
+use App\Http\Controllers\Admin\StudentsController;
+use App\Http\Controllers\Admin\VisitController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
