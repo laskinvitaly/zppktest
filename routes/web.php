@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Front\CertificationController;
+use App\Http\Controllers\Front\CertupdatedController;
 use App\Http\Controllers\Admin\StudentsController;
 use App\Http\Controllers\Admin\VisitController;
 /*
@@ -26,9 +28,12 @@ use App\Http\Controllers\Admin\VisitController;
 Route::get('/', [PageController::class, 'index'])->name('frontpage');
 Route::get('/empty', [PageController::class, 'empty'])->name('empty');
 Route::group(['prefix' => 'certification'], function(){
-    Route::get('/', [App\Http\Controllers\Front\CertificationController::class, 'index'])->name('front.certification.index');
-    Route::get('/create', [App\Http\Controllers\Front\CertificationController::class, 'create'])->name('front.certification.create');
-    Route::post('/', [App\Http\Controllers\Front\CertificationController::class, 'store'])->name('front.certification.store');
+    Route::get('/', [CertificationController::class, 'index'])->name('front.certification.index');
+    Route::get('/create', [CertificationController::class, 'create'])->name('front.certification.create');
+    Route::get('/{teacher}', [CertificationController::class, 'show'])->name('front.certification.show');
+    Route::post('/', [CertificationController::class, 'store'])->name('front.certification.store');
+    Route::get('/{teacher}/update', [CertificationController::class, 'update'])->name('front.certification.update');
+    Route::patch('/{teacher}/store', [CertificationController::class, 'stor'])->name('front.certification.stor');
 });
 Route::group(['prefix' => 'news'], function(){
     Route::get('/', [App\Http\Controllers\Front\NewsController::class, 'index'])->name('front.news.index');
