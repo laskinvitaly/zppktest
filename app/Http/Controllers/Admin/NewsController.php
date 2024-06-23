@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
+use App\Models\News;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -12,7 +17,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news.index');
+        $news = News::all();
+        return view('admin.news.index', compact('news'));
     }
 
     /**
@@ -20,7 +26,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        $categories = Categories::all();
+        return view('admin.news.create', compact('categories'));
     }
 
     /**
@@ -28,23 +35,50 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        dd("Новость создана");
+        $data = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'readmore' => 'required|string',
+            'keyword' => 'required|string',
+            'image' => 'nullable|file',
+            'date' => 'nullable|string'
+        ]);
+        if($request->hasFile('image')){
+            $data['image'] = Storage::disk('public')->put('/news/image', $data['image']);
+        }
+
+        $time = new DateTime("");
+        $time->setTimezone(new DateTimeZone("Europe/Moscow"));
+        $time = $time->format("Y-m-d H:i");
+        $data['date'] = $time;
+
+        try {
+            News::CreateOrFirst($data);
+        } catch (\Exception $exception) {            
+            return $exception->getMessage();
+        }
+
+        return redirect()->route('new.index');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        return view('admin.news.show');
+    {   
+        $news = News::where('id', $id)->first();
+        $categori = Categories::where('id', $news->keyword)->first();
+        return view('admin.news.show', compact('news', 'categori'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        return view('admin.news.edit');
+    {   
+        $categories = Categories::all();
+        $news = News::where('id', $id)->first();
+        return view('admin.news.edit', compact('news', 'categories'));
     }
 
     /**
@@ -52,7 +86,21 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd("Новость изменена");
+        $data = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'readmore' => 'required|string',
+            'keyword' => 'required|string',
+            'image' => 'nullable|file',
+        ]);
+
+        if($request->hasFile('image')){
+            $data['image'] = Storage::disk('public')->put('/news/image', $data['image']);
+        }
+
+        News::where('id', $id)->update($data);
+
+        return redirect()->route('new.index');
     }
 
     /**
@@ -60,6 +108,11 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        dd("Новость удалена");
+        $new = News::find($id);
+        if(!$new) {
+            return abort(404);
+        }
+        $new->delete();
+        return redirect()->route('new.index');
     }
 }
